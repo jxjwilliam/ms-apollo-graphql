@@ -6,7 +6,7 @@ const client = new ApolloClient({
     cache: new InMemoryCache()
 });
 
-cost GET = gql`
+const GET = gql`
     query {
 
     }

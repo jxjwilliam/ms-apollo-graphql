@@ -3,7 +3,7 @@ const { ApolloServer, gql } = require('apollo-server-express')
 
 require('dotenv').config()
 
-const port = process.env.APOLLO_EXPRESS_PORT
+const {APOLLO_EXPRESS_PORT} = process.env
 
 const typeDefs = gql`
 	type Query {
@@ -23,7 +23,7 @@ const app = express()
 
 server.applyMiddleware({ app })
 
-app.listen({ port }, () => {
+app.listen({ port: APOLLO_EXPRESS_PORT }, () => {
 	// eslint-disable-next-line no-console
-	console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`)
+	console.log(`🚀 Server ready at http://localhost:${APOLLO_EXPRESS_PORT}${server.graphqlPath}`)
 })
