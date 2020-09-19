@@ -4,7 +4,7 @@ const { buildSchema } = require('graphql')
 
 require('dotenv').config()
 
-const {EXPRESS_GRAPHQL_PORT} = process.env
+const { EXPRESS_GRAPHQL_PORT: port } = process.env
 
 // 使用 GraphQL Schema Language 创建一个 schema
 const schema = buildSchema(`
@@ -32,7 +32,7 @@ app.use(
 	})
 )
 
-app.listen(EXPRESS_GRAPHQL_PORT, () => {
+app.listen(port, () => {
 	// eslint-disable-next-line no-console
-	console.log(`Running a GraphQL API server at http://localhost:${EXPRESS_GRAPHQL_PORT}/graphql`)
+	console.log(`Running a GraphQL API server at http://localhost:${port}/graphql`)
 })

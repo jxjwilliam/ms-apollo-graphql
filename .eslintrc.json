@@ -25,8 +25,7 @@
         "ignoreUrls": true,
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true,
-        "ignoreRegExpLiterals": true,
-        "no-console": false
+        "ignoreRegExpLiterals": true
       }
     ]
   }
