@@ -1,6 +1,7 @@
 ### Quick start
 
 ---
+
 ```shell script
 $ git clone https://github.com/WilliamJiang/ms-graphql.git
 $ cd ms-graphql
@@ -9,11 +10,10 @@ $ yarn start
 $ open http://localhost:3000
 ```
 
-
-
 ### URLs:
 
---- 
+---
+
 - client: http://localhost:3000/
 - gateway: http://localhost:8621/
 - express: http://localhost:8626/graphql
@@ -25,7 +25,8 @@ $ open http://localhost:3000
 
 ### 2. express-graphql
 
---- 
+---
+
 - 462,203, [graphql/express-graphql](https://github.com/graphql/express-graphql)
 
 ### 3. apollo-server-express
@@ -37,6 +38,7 @@ $ open http://localhost:3000
 ### 4. client
 
 ---
+
 - @apollo/client, graphql
 - Material-UI
 - http-proxy-middleware
@@ -45,12 +47,14 @@ $ open http://localhost:3000
 ### 5. As a whole
 
 ---
+
 - eslint + prettier + airbnb
 - concurrently
-
 
 ### Resource:
 
 ---
 
 - [Setup ESLint, Prettier & Airbnb Style Guide in under 2 Minutes](https://github.com/paulolramos/eslint-prettier-airbnb-react)
+
+- [sqlite3, express, graphql, react](https://github.com/jgilbertcastro/micro-blog)
