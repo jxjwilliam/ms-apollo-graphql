@@ -1,17 +1,18 @@
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
 const { buildSchema } = require('graphql')
+const schema = require('./blog/schema')
 
 require('dotenv').config()
 
 const { EXPRESS_GRAPHQL_PORT: port } = process.env
 
 // 使用 GraphQL Schema Language 创建一个 schema
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`)
+// const schema = buildSchema(`
+//   type Query {
+//     hello: String
+//   }
+// `)
 
 // root 提供所有 API 入口端点相应的解析器函数
 const root = {
@@ -26,8 +27,8 @@ const app = express()
 app.use(
 	'/graphql',
 	graphqlHTTP({
-		schema,
-		rootValue: root,
+		schema: schema.schema,
+		// rootValue: root,
 		graphiql: true,
 	})
 )

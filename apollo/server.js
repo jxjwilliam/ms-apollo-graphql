@@ -17,6 +17,7 @@ const resolvers = {
 	},
 }
 
+// uses `makeExecutableSchema` under the hood.
 const server = new ApolloServer({
 	typeDefs: './schema',
 	resolvers: './resolver',

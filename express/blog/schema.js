@@ -2,9 +2,11 @@
 /* eslint-disable prefer-promise-reject-errors */
 const graphql = require('graphql')
 const sqlite3 = require('sqlite3').verbose()
+const path = require('path')
 
 // create a database if no exists
-const database = new sqlite3.Database('../micro-blog.db')
+const dbpath = path.resolve(path.dirname('./'), 'blog', 'micro-blog.db')
+const database = new sqlite3.Database(dbpath)
 
 // create a table to insert post
 const createPostTable = () => {
@@ -33,6 +35,7 @@ const PostType = new graphql.GraphQLObjectType({
 		author: { type: graphql.GraphQLString },
 	},
 })
+
 // create a graphql query to select all and by id
 const queryType = new graphql.GraphQLObjectType({
 	name: 'Query',
@@ -73,6 +76,7 @@ const queryType = new graphql.GraphQLObjectType({
 		},
 	},
 })
+
 // mutation type is a type of object to modify data (INSERT,DELETE,UPDATE)
 const mutationType = new graphql.GraphQLObjectType({
 	name: 'Mutation',
@@ -106,7 +110,7 @@ const mutationType = new graphql.GraphQLObjectType({
 							if (err) {
 								reject(null)
 							}
-							database.get('SELECT last_insert_rowid() as id', (err, row) => {
+							database.get('SELECT last_insert_rowid() as id', (error, row) => {
 								resolve({
 									id: row.id,
 									title,

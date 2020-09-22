@@ -31,8 +31,4 @@ nohup.out
 .storybook
 .eslintcache
 
-build
-uploads
-client/public/_book/
-client/public/gitbook/
-news-api-react
+*.db
