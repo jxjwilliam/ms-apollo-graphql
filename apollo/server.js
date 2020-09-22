@@ -3,7 +3,7 @@ const { ApolloServer, gql } = require('apollo-server-express')
 
 require('dotenv').config()
 
-const {APOLLO_EXPRESS_PORT} = process.env
+const { APOLLO_EXPRESS_PORT } = process.env
 
 const typeDefs = gql`
 	type Query {
@@ -17,7 +17,10 @@ const resolvers = {
 	},
 }
 
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({
+	typeDefs: './schema',
+	resolvers: './resolver',
+})
 
 const app = express()
 
