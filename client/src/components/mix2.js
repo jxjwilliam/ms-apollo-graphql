@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import ReactSelect from "react-select";
 import { TextField, Checkbox } from "@material-ui/core";
 
 export default function () {

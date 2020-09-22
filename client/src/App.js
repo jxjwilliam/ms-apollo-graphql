@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from 'react';
+import { ApolloProvider, ApolloClient, InMemoryCache, gql, useQuery } from '@apollo/client'
+import Album from './components/Album'
+
+require('dotenv').config()
+
+const {GATEWAY_PORT: gport } = process.env;
+const client = new ApolloClient({
+  uri: `http://localhost:${gport}`,
+  cache: new InMemoryCache()
+})
+
+const EXCHANGE_RATES = gql`
+  query GetExchangeRates {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
+`;
+
+function ExchangeRates() {
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+  if (!data) return null;
+
+  return <Album data={data}/>
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <div className="App">
+        <ExchangeRates/>
+      </div>
+    </ApolloProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 
 // The following component is an example of your existing Input Component 
@@ -10,24 +10,31 @@ const Input = ({ label, register, required }) => (
 );
 
 // you can use React.forwardRef to pass the ref too
-const Select = React.forwardRef(({ label, register }, ref) => (
-	<>
-		<label>{label}</label>
-		<select name={label} ref={ref}>
-			<option value="20">20</option>
-			<option value="30">30</option>
-		</select>
-	</>
-));
+const Select = React.forwardRef(({ label, register }, ref, onSelected, data) => {
+	return (
+		<>
+			<label>{label}</label>
+			<select name={label} ref={ref} onChange={onSelected}>
+				{data.map(item => (
+					<option key={item.id} value={item.value}>
+						{item.label}
+					</option>
+				))}
+			</select>
+		</>
+	)
+});
 
 export default function () {
 	const { register, handleSubmit } = useForm();
+	const [data, setData] = useState([])
 	const onSubmit = data => console.log(data);
+	const onSelected = () => {}
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<Input label="First Name" register={register} required />
-			<Select label="Age" ref={register} />
+			<Select label="Age" ref={register} onSelected={onSelected} data={data} />
 			<input type="submit" />
 		</form>
 	);
