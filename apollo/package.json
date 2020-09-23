@@ -1,20 +1,12 @@
 {
-  "name": "apollo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "name": "accounts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@apollo/federation": "latest",
-    "apollo-server-express": "latest",
+    "apollo-server": "latest",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
     "graphql": "latest"
   },
   "devDependencies": {

@@ -5,7 +5,7 @@
 ```shell script
 $ git clone https://github.com/WilliamJiang/ms-graphql.git
 $ cd ms-graphql
-$ yarn install (respectfully install dependencies under client/, gateway/, express/, apollo/)
+$ yarn install (respectfully install dependencies under client/, gateway/, express/, apollo-express/)
 $ yarn start
 $ open http://localhost:3000
 ```

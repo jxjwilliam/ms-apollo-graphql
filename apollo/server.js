@@ -1,45 +1,60 @@
-const express = require('express')
-const { ApolloServer, gql } = require('apollo-server-express')
-const { buildFederatedSchema } = require("@apollo/federation");
+const { ApolloServer, gql } = require('apollo-server')
+const { buildFederatedSchema } = require('@apollo/federation')
 
 require('dotenv').config()
 
-const { APOLLO_EXPRESS_PORT: port } = process.env
+const { APOLLO_PORT: port } = process.env
 
 const typeDefs = gql`
 	extend type Query {
-		me1: User
+		author: Author
 	}
 
-	type User {
+	type Author @key(fields: "id") {
 		id: ID!
+		name: String
 		username: String
+		birthDate: String
 	}
 `
 
+const authors = [
+	{
+		id: '1',
+		name: 'Ada Lovelace',
+		birthDate: '1815-12-10',
+		username: '@ada',
+	},
+	{
+		id: '2',
+		name: 'Alan Turing',
+		birthDate: '1912-06-23',
+		username: '@complete',
+	},
+]
+
 const resolvers = {
 	Query: {
-		me1() {
-			return { id: '1', username: '@williamjxj' }
+		author() {
+			return authors
+		},
+	},
+	Author: {
+		__resolveReference(object) {
+			return authors.find(user => user.id === object.id)
 		},
 	},
 }
 
-// uses `makeExecutableSchema` under the hood.
 const server = new ApolloServer({
 	schema: buildFederatedSchema([
 		{
 			typeDefs,
-			resolvers
-		}
-	])
+			resolvers,
+		},
+	]),
 })
 
-const app = express()
-
-server.applyMiddleware({ app })
-
-app.listen({ port }, () => {
-	// eslint-disable-next-line no-console
-	console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`)
+server.listen({ port }).then(({ url }) => {
+	console.log(`🚀 Server ready at ${url}`)
 })

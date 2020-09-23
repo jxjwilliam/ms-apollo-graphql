@@ -37,6 +37,6 @@
 		"import/no-dynamic-require": "off",
 		"import/no-extraneous-dependencies": "off",
 		"prefer-promise-reject-errors": "off",
-		"no-console": "off"
+		"no-underscore-dangle": "off"
 	}
 }

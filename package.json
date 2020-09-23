@@ -7,10 +7,11 @@
     "run-client": "cd client && yarn start",
     "run-gateway": "cd gateway && yarn start",
     "run-services": "concurrently \"yarn run-client\" \"yarn run-gateway\"",
-    "start-service-accounts": "cd accounts && yarn start",
-    "start-service-express": "cd express && yarn start",
     "start-service-apollo": "cd apollo && yarn start",
+    "start-service-express": "cd express && yarn start",
+    "start-service-apollo-express": "cd apollo-express && yarn start",
     "start-services": "concurrently \"npm:start-service-*\"",
+    "start": "concurrently \"npm:start-service-*\" \"yarn run-services\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -23,8 +24,8 @@
   "author": "Best IT Consultants",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^8.2.0",
     "@apollo/federation": "latest",
+    "dotenv": "^8.2.0",
     "graphql": "latest",
     "graphql.macro": "^1.4.2",
     "sqlite3": "^5.0.0"

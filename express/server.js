@@ -1,8 +1,9 @@
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
 const { buildSchema } = require('graphql')
+const { buildFederatedSchema } = require("@apollo/federation")
+// directly access by frontend-react
 const cors = require('cors')
-const { buildFederatedSchema } = require("@apollo/federation");
 const schema = require('./blog/schema')
 
 require('dotenv').config()
