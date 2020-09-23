@@ -1,12 +1,15 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable prefer-promise-reject-errors */
+const path = require('path')
 const graphql = require('graphql')
 const sqlite3 = require('sqlite3').verbose()
-const path = require('path')
+
+/**
+ * https://dev.to/jgilbertcastro/build-a-simple-blog-with-graphql-node-js-sqlite-and-vue-angular-or-reactjs-3923
+ * https://github.com/jgilbertcastro/micro-blog/blob/master/micro-blog-api/graphql/post/post.js
+ */
 
 // create a database if no exists
-const dbpath = path.resolve(path.dirname('./'), 'blog', 'micro-blog.db')
-const database = new sqlite3.Database(dbpath)
+// const dbpath = path.resolve(path.dirname('.'), 'blog', 'blog.db')
+const database = new sqlite3.Database('./blog/blog.db')
 
 // create a table to insert post
 const createPostTable = () => {
@@ -24,7 +27,7 @@ const createPostTable = () => {
 // call function to init the post table
 createPostTable()
 
-// creacte graphql post object
+// create graphql post object
 const PostType = new graphql.GraphQLObjectType({
 	name: 'Post',
 	fields: {

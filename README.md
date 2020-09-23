@@ -58,3 +58,9 @@ $ open http://localhost:3000
 - [Setup ESLint, Prettier & Airbnb Style Guide in under 2 Minutes](https://github.com/paulolramos/eslint-prettier-airbnb-react)
 
 - [sqlite3, express, graphql, react](https://github.com/jgilbertcastro/micro-blog)
+
+
+### TODO
+
+- graphql-tag
+- graphql-tool

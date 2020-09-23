@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 /* eslint-disable consistent-return */
 const sqlite3 = require('sqlite3').verbose()
 
@@ -17,7 +19,6 @@ db.close(err => {
 	console.log('Close the database connection.')
 })
 
-//
 db = new sqlite3.Database('./sqlite3.db', err => {
 	if (err) {
 		console.error(err.message)

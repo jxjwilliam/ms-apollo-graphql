@@ -5,10 +5,12 @@
   "main": "app.js",
   "scripts": {
     "run-client": "cd client && yarn start",
-    "run-express": "cd express && yarn start",
-    "run-apollo": "cd apollo && yarn start",
     "run-gateway": "cd gateway && yarn start",
-    "start": "concurrently \"yarn run-client\" \"yarn run-express\" \"yarn run-apollo\" \"yarn run-gateway\"",
+    "run-services": "concurrently \"yarn run-client\" \"yarn run-gateway\"",
+    "start-service-accounts": "cd accounts && yarn start",
+    "start-service-express": "cd express && yarn start",
+    "start-service-apollo": "cd apollo && yarn start",
+    "start-services": "concurrently \"npm:start-service-*\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -22,7 +24,9 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "graphql": "^15.3.0",
+    "@apollo/federation": "latest",
+    "graphql": "latest",
+    "graphql.macro": "^1.4.2",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {

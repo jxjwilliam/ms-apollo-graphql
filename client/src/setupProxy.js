@@ -1,14 +1,13 @@
 const { createProxyMiddleware } = require('http-proxy-middleware')
 
-const URLS = 'http://localhost'
-
 require('dotenv').config()
-const { GATEWAY_PORT } = process.env
+
+const URL = `http://localhost:${process.env.REACT_APP_GATEWAY_PORT}`
 
 module.exports = function (app) {
   app.use(
     createProxyMiddleware('/graphql', {
-      target: `${URLS}:${GATEWAY_PORT}/`,
+      target: URL,
       changeOrigin: true,
     })
   )

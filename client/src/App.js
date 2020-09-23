@@ -1,39 +1,39 @@
-import React, {useEffect} from 'react';
-import { ApolloProvider, ApolloClient, InMemoryCache, gql, useQuery } from '@apollo/client'
-import Album from './components/Album'
+import React, {useEffect, useState} from 'react';
+import { ApolloProvider, ApolloClient, InMemoryCache, gql, useQuery,  } from '@apollo/client'
+// import { Blog } from './mui'
+import Blog from './graphql'
 
 require('dotenv').config()
-
-const {GATEWAY_PORT: gport } = process.env;
+const { REACT_APP_GATEWAY_PORT: GatewayPort } = process.env;
+console.log('!!!', GatewayPort )
 const client = new ApolloClient({
-  uri: `http://localhost:${gport}`,
+  uri: `http://localhost:${GatewayPort}`,
   cache: new InMemoryCache()
 })
 
-const EXCHANGE_RATES = gql`
-  query GetExchangeRates {
-    rates(currency: "USD") {
-      currency
-      rate
-    }
+function CALLME() {
+  const ME111 = gql`
+{
+  me1 {
+    username
   }
-`;
-
-function ExchangeRates() {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+}
+   `
+  const { loading, error, data } = useQuery(ME111);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  if (!data) return null;
 
-  return <Album data={data}/>
+  return <div>{JSON.stringify(data, null, 4)}</div>
 }
 
 function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <ExchangeRates/>
+        <CALLME/>
+        {/*<Blog />*/}
+        {/*<ExchangeRates/>*/}
       </div>
     </ApolloProvider>
   );

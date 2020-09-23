@@ -8,11 +8,11 @@
     "start": "nodemon server.js"
   },
   "dependencies": {
-    "@apollo/gateway": "^0.16.4",
-    "apollo-server": "^2.14.2",
+    "@apollo/gateway": "latest",
+    "apollo-server": "latest",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "graphql": "^15.3.0"
+    "graphql": "latest"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
