@@ -1,6 +1,6 @@
 import React from 'react'
 import { gql, useQuery } from '@apollo/client'
-import { Error, Loading, NotFound } from '../mui'
+import { Error, Loading, NotFound } from '../../mui'
 import SimpleCard from './SimpleCard'
 
 const GET_AUTHOR = gql`

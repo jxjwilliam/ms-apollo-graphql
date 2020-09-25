@@ -1,7 +1,7 @@
 import React from 'react'
 import { gql, useQuery } from '@apollo/client'
-import { Loading, Error, NotFound } from '../mui'
-import { DataPrint } from '../helpers/utils'
+import { Loading, Error, NotFound } from '../../mui'
+import { DataPrint } from '../../helpers/utils'
 
 const GET_ACCOUNT = gql`
     {
