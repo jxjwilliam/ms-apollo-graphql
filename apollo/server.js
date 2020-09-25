@@ -36,7 +36,7 @@ const authors = [
 const resolvers = {
 	Query: {
 		author() {
-			return authors
+			return authors[0]
 		},
 	},
 	Author: {

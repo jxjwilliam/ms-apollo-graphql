@@ -8,13 +8,13 @@ const sqlite3 = require('sqlite3').verbose()
  */
 
 // create a database if no exists
-// const dbpath = path.resolve(path.dirname('.'), 'blog', 'blog.db')
-const database = new sqlite3.Database('./blog/blog.db')
+const dbpath = path.resolve(path.dirname('.'), 'blog', 'blog.db')
+const database = new sqlite3.Database(dbpath) // ./blog/blog.db
 
-// create a table to insert post
-const createPostTable = () => {
+// create a table to insert blog
+const createBlogTable = () => {
 	const query = `
-        CREATE TABLE IF NOT EXISTS posts (
+        CREATE TABLE IF NOT EXISTS blogs (
         id integer PRIMARY KEY,
         title text,
         description text,
@@ -24,12 +24,12 @@ const createPostTable = () => {
 	return database.run(query)
 }
 
-// call function to init the post table
-createPostTable()
+// call function to init the blog table
+createBlogTable()
 
-// create graphql post object
-const PostType = new graphql.GraphQLObjectType({
-	name: 'Post',
+// create graphql blog object
+const BlogType = new graphql.GraphQLObjectType({
+	name: 'Blog',
 	fields: {
 		id: { type: graphql.GraphQLID },
 		title: { type: graphql.GraphQLString },
@@ -44,12 +44,12 @@ const queryType = new graphql.GraphQLObjectType({
 	name: 'Query',
 	fields: {
 		// first query to select all
-		Posts: {
-			type: graphql.GraphQLList(PostType),
+		Blogs: {
+			type: graphql.GraphQLList(BlogType),
 			resolve: (root, args, context, info) => {
 				return new Promise((resolve, reject) => {
 					// raw SQLite query to select from table
-					database.all('SELECT * FROM Posts;', function (err, rows) {
+					database.all('SELECT * FROM Blogs;', function (err, rows) {
 						if (err) {
 							reject([])
 						}
@@ -59,8 +59,8 @@ const queryType = new graphql.GraphQLObjectType({
 			},
 		},
 		// second query to select by id
-		Post: {
-			type: PostType,
+		Blog: {
+			type: BlogType,
 			args: {
 				id: {
 					type: new graphql.GraphQLNonNull(graphql.GraphQLID),
@@ -68,7 +68,7 @@ const queryType = new graphql.GraphQLObjectType({
 			},
 			resolve: (root, { id }, context, info) => {
 				return new Promise((resolve, reject) => {
-					database.all('SELECT * FROM Posts WHERE id = (?);', [id], function (err, rows) {
+					database.all('SELECT * FROM Blogs WHERE id = (?);', [id], function (err, rows) {
 						if (err) {
 							reject(null)
 						}
@@ -84,11 +84,11 @@ const queryType = new graphql.GraphQLObjectType({
 const mutationType = new graphql.GraphQLObjectType({
 	name: 'Mutation',
 	fields: {
-		// mutation for creacte
-		createPost: {
+		// mutation for create
+		createBlog: {
 			// type of object to return after create in SQLite
-			type: PostType,
-			// argument of mutation creactePost to get from request
+			type: BlogType,
+			// argument of mutation createBlog to get from request
 			args: {
 				title: {
 					type: new graphql.GraphQLNonNull(graphql.GraphQLString),
@@ -105,9 +105,9 @@ const mutationType = new graphql.GraphQLObjectType({
 			},
 			resolve: (root, { title, description, createDate, author }) => {
 				return new Promise((resolve, reject) => {
-					// raw SQLite to insert a new post in post table
+					// raw SQLite to insert a new blog in blog table
 					database.run(
-						'INSERT INTO Posts (title, description, createDate, author) VALUES (?,?,?,?);',
+						'INSERT INTO Blogs (title, description, createDate, author) VALUES (?,?,?,?);',
 						[title, description, createDate, author],
 						err => {
 							if (err) {
@@ -128,10 +128,10 @@ const mutationType = new graphql.GraphQLObjectType({
 			},
 		},
 		// mutation for update
-		updatePost: {
+		updateBlog: {
 			// type of object to return afater update in SQLite
 			type: graphql.GraphQLString,
-			// argument of mutation creactePost to get from request
+			// argument of mutation createBlog to get from request
 			args: {
 				id: {
 					type: new graphql.GraphQLNonNull(graphql.GraphQLID),
@@ -151,22 +151,22 @@ const mutationType = new graphql.GraphQLObjectType({
 			},
 			resolve: (root, { id, title, description, createDate, author }) => {
 				return new Promise((resolve, reject) => {
-					// raw SQLite to update a post in post table
+					// raw SQLite to update a blog in blog table
 					database.run(
-						'UPDATE Posts SET title = (?), description = (?), createDate = (?), author = (?) WHERE id = (?);',
+						'UPDATE Blogs SET title = (?), description = (?), createDate = (?), author = (?) WHERE id = (?);',
 						[title, description, createDate, author, id],
 						err => {
 							if (err) {
 								reject(err)
 							}
-							resolve(`Post #${id} updated`)
+							resolve(`Blog #${id} updated`)
 						}
 					)
 				})
 			},
 		},
 		// mutation for update
-		deletePost: {
+		deleteBlog: {
 			// type of object resturn after delete in SQLite
 			type: graphql.GraphQLString,
 			args: {
@@ -176,12 +176,12 @@ const mutationType = new graphql.GraphQLObjectType({
 			},
 			resolve: (root, { id }) => {
 				return new Promise((resolve, reject) => {
-					// raw query to delete from post table by id
-					database.run('DELETE from Posts WHERE id =(?);', [id], err => {
+					// raw query to delete from blog table by id
+					database.run('DELETE from Blogs WHERE id =(?);', [id], err => {
 						if (err) {
 							reject(err)
 						}
-						resolve(`Post #${id} deleted`)
+						resolve(`Blog #${id} deleted`)
 					})
 				})
 			},
@@ -189,7 +189,7 @@ const mutationType = new graphql.GraphQLObjectType({
 	},
 })
 
-// define schema with post object, queries, and mustation
+// define schema with blog object, queries, and mustation
 const schema = new graphql.GraphQLSchema({
 	query: queryType,
 	mutation: mutationType,

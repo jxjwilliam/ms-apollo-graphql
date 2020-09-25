@@ -17,9 +17,10 @@ import Skeleton from "@material-ui/lab/Skeleton";
 const useStyles = makeStyles(theme =>
 	createStyles({
 		root: {
-			display: 'inline-flex',
+			display: 'flex',
 			direction: 'row',
-			width: "40%"
+			width: "40%",
+			margin: '40px auto'
 		},
 		card: {
 			padding: "12px"
@@ -33,9 +34,9 @@ const useStyles = makeStyles(theme =>
 // https://codesandbox.io/s/sckvn?file=/src/App.js:680-684
 const SimpleCard = ({ data = {} }) => {
 	const classes = useStyles();
-	console.log(data.me)
-	const loading = Object.keys(data.me).length === 0;
-	const { id, name, username, birthDate} = data.me;
+	console.log(data.author)
+	const loading = Object.keys(data.author).length === 0;
+	const { id, name, username, birthDate } = data.author;
 	return (
 		<Box className={classes.root}>
 			<Card className={classes.card}>
@@ -49,10 +50,10 @@ const SimpleCard = ({ data = {} }) => {
 								height={40}
 							/>
 						) : (
-							<Avatar aria-label="recipe" className={classes.avatar}>
-								{name.charAt(0).toUpperCase()}
-							</Avatar>
-						)
+								<Avatar aria-label="recipe" className={classes.avatar}>
+									{name.charAt(0).toUpperCase()}
+								</Avatar>
+							)
 					}
 					action={
 						loading ? null : (
@@ -88,10 +89,10 @@ const SimpleCard = ({ data = {} }) => {
 							<Skeleton animation="wave" height={10} width="80%" />
 						</>
 					) : (
-						<Typography variant="body2" color="textSecondary" component="p">
-							{name}
-						</Typography>
-					)}
+							<Typography variant="body2" color="textSecondary" component="p">
+								{name}
+							</Typography>
+						)}
 				</CardContent>
 				<CardActions disableSpacing>
 					{loading ? null : (
@@ -110,4 +111,4 @@ const SimpleCard = ({ data = {} }) => {
 	);
 };
 
-export default SimpleCard;
+export default React.memo(SimpleCard);

@@ -1,8 +1,5 @@
 export { default as Album } from './Album'
-export { default as Blog } from './Blog'
-export { default as ExchangeRate } from './ExchangeRate'
 export { default as HookForm } from './HookForm'
 export { default as Loading } from './Loading'
 export { default as NotFound } from './NotFound'
 export { default as Error } from './Error'
-export { default as SimpleCard } from './simpleCard'

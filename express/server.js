@@ -1,20 +1,19 @@
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
-const { buildSchema } = require('graphql')
-const { buildFederatedSchema } = require("@apollo/federation")
+
 // directly access by frontend-react
 const cors = require('cors')
 const schema = require('./blog/schema')
 
 require('dotenv').config()
 
-const { EXPRESS_GRAPHQL_PORT: port } = process.env
+const { EXPRESS_GRAPHQL_PORT: port } = process.env // 8626
 
 const app = express()
 
 app.use(cors())
 
-// GraphiQL is on http://localhost:8069/graphql
+// GraphiQL is on http://localhost:8626/graphql
 app.use(
 	'/graphql',
 	graphqlHTTP({
