@@ -1,5 +1,5 @@
 {
-  "name": "apollo",
+  "name": "apollo-server-express",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",

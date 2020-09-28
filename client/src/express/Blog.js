@@ -70,16 +70,13 @@ export default function () {
 		switch (type) {
 			case 'ADD':
 				variables = isEmpty(data) ? generatorBlogData() : data
-				console.log('111', variables, createBlog)
 				createBlog({ variables });
 				break;
 			case 'UPDATE':
 				const {id, ...rest } = data
-				console.log('222', data, updateBlog)
 				updateBlog({variables: {id: parseInt(id), ...rest}})
 				break;
 			case 'DELETE':
-				console.log('333', data, deleteBlog)
 				deleteBlog({variables: { id: data }})
 				break;
 			default:

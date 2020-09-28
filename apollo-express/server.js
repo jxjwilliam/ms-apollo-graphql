@@ -6,33 +6,18 @@ require('dotenv').config()
 
 const { APOLLO_EXPRESS_PORT: port } = process.env
 
-const typeDefs = gql`
-	extend type Query {
-		profile: Account
-	}
+const definition = require('./schema')
 
-	type Account {
-		id: ID!
-		account: String
-	}
+const typeDefs = gql`
+	${definition}
 `
 
-const resolvers = {
-	Query: {
-		profile() {
-			return { id: '1', account: '@williamjxj' }
-		},
-	},
-}
+const resolvers = require('./resolvers')
 
+// // http://localhost:8627/graphql
 // uses `makeExecutableSchema` under the hood.
 const server = new ApolloServer({
-	schema: buildFederatedSchema([
-		{
-			typeDefs,
-			resolvers,
-		},
-	]),
+	schema: buildFederatedSchema([{ typeDefs, resolvers }]),
 })
 
 const app = express()

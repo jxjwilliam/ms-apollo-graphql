@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Paper, Tabs, Tab } from '@material-ui/core';
+import {Container, Tabs, Tab } from '@material-ui/core';
 import Gateway from './gateway'
-import Account from './gateway/apollo-express/Account'
+import Account from './gateway/apollo-express/Todo'
 import Author from './gateway/apollo/Author'
 import Blog from './express'
 
@@ -17,9 +17,9 @@ function TabPanel(props) {
 
 	return (
 		<div
-			role="tabpanel"
+			role="navigator"
 			hidden={value !== index}
-			id={`scrollable-auto-tabpanel-${index}`}
+			id={`scrollable-auto-navigator-${index}`}
 			aria-labelledby={`scrollable-auto-tab-${index}`}
 			{...other}
 		>
@@ -37,7 +37,7 @@ export default function App() {
 	};
 
 	return (
-		<Paper className={classes.root}>
+		<Container className={classes.root}>
 			<Tabs
 				value={value}
 				onChange={handleChange}
@@ -60,6 +60,6 @@ export default function App() {
 					<Account/>
 				</TabPanel>
 			</Gateway>
-		</Paper>
+		</Container>
 	);
 }

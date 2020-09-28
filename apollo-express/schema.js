@@ -1,60 +1,29 @@
-const User = `
-	type User {
-		id: ID!
-		name: String!
-	}
-`
-
 const typeDefs = `
-	type Query {
-		
-		users: [User!]!
+	type Todo {
+		id: ID!
+		title: String!
+		description: String!
+		completed: Boolean!
+		createDate: String!
+	}
 
-		user(id: ID!): User
+	type Query {
+		todos: [Todo]
+		todo(id: ID!): Todo
 	}
 
 	type Mutation {
-		
-		createUser(name: String!): User!
-
-		updateUser(id: ID!, name: String): User
-
-		deleteUser(id: ID!): User
+		add_todo(todo: TodoInput): Todo!
+		update_todo(id: ID!, todo: TodoInput): Todo
+		delete_todo(id: ID!): Todo
 	}
 
-	type Subscription {
-
-	}
-`
-
-/////////////////
-
-// Query for all users
-const QUERY_ALL_USERS = `
-	query {
-		users {
-			id
-			name
-		}
+	input TodoInput {
+		title: String!
+		description: String!
+		completed: Boolean! = false
+		createDate: String!
 	}
 `
 
-// Query a single user by their id
-const QUERY_SINGLE_USER = `
-	query {
-		user(id: $id) {
-			id
-			name
-		}
-	}
-`
-
-// Create a new user
-const CREATE_USER = `
-	mutation {
-		createUser(name: "Bob") {
-			id
-			name
-		}
-	}
-`
+module.exports = typeDefs

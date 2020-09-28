@@ -8,8 +8,8 @@ const sqlite3 = require('sqlite3').verbose()
  */
 
 // create a database if no exists
-const dbpath = path.resolve(path.dirname('.'), 'blog', 'blog.db')
-const database = new sqlite3.Database(dbpath) // ./blog/blog.db
+const dbpath = path.resolve(path.dirname('.'), 'blog.db')
+const database = new sqlite3.Database(dbpath)
 
 // create a table to insert blog
 const createBlogTable = () => {
@@ -49,7 +49,7 @@ const queryType = new graphql.GraphQLObjectType({
 			resolve: (root, args, context, info) => {
 				return new Promise((resolve, reject) => {
 					// raw SQLite query to select from table
-					database.all('SELECT * FROM Blogs;', function (err, rows) {
+					database.all('SELECT * FROM blogs;', function (err, rows) {
 						if (err) {
 							reject([])
 						}
@@ -68,7 +68,7 @@ const queryType = new graphql.GraphQLObjectType({
 			},
 			resolve: (root, { id }, context, info) => {
 				return new Promise((resolve, reject) => {
-					database.all('SELECT * FROM Blogs WHERE id = (?);', [id], function (err, rows) {
+					database.all('SELECT * FROM blogs WHERE id = (?);', [id], function (err, rows) {
 						if (err) {
 							reject(null)
 						}
@@ -107,7 +107,7 @@ const mutationType = new graphql.GraphQLObjectType({
 				return new Promise((resolve, reject) => {
 					// raw SQLite to insert a new blog in blog table
 					database.run(
-						'INSERT INTO Blogs (title, description, createDate, author) VALUES (?,?,?,?);',
+						'INSERT INTO blogs (title, description, createDate, author) VALUES (?,?,?,?);',
 						[title, description, createDate, author],
 						err => {
 							if (err) {
@@ -153,7 +153,7 @@ const mutationType = new graphql.GraphQLObjectType({
 				return new Promise((resolve, reject) => {
 					// raw SQLite to update a blog in blog table
 					database.run(
-						'UPDATE Blogs SET title = (?), description = (?), createDate = (?), author = (?) WHERE id = (?);',
+						'UPDATE blogs SET title = (?), description = (?), createDate = (?), author = (?) WHERE id = (?);',
 						[title, description, createDate, author, id],
 						err => {
 							if (err) {
@@ -177,7 +177,7 @@ const mutationType = new graphql.GraphQLObjectType({
 			resolve: (root, { id }) => {
 				return new Promise((resolve, reject) => {
 					// raw query to delete from blog table by id
-					database.run('DELETE from Blogs WHERE id =(?);', [id], err => {
+					database.run('DELETE from blogs WHERE id =(?);', [id], err => {
 						if (err) {
 							reject(err)
 						}

@@ -5,18 +5,13 @@ require('dotenv').config()
 
 const { GATEWAY_PORT, EXPRESS_GRAPHQL_PORT, APOLLO_EXPRESS_PORT, APOLLO_PORT } = process.env
 
-// Initialize an ApolloGateway instance and pass it an array of
-// your implementing service names and URLs
+/**
+ * Not identified by gateway. so extract `express` as a parallel services along with `gateway`
+ * { name: 'countries2',	url: `https://countries-274616.ew.r.appspot.com/` },
+ * { name: 'express', url: `http://localhost:${EXPRESS_GRAPHQL_PORT}/graphql` },
+ */
 const gateway = new ApolloGateway({
 	serviceList: [
-		// {
-		// 	name: 'countries2',
-		// 	url: `https://countries-274616.ew.r.appspot.com/`,
-		// },
-		// {
-		// 	name: 'express',
-		// 	url: `http://localhost:${EXPRESS_GRAPHQL_PORT}/graphql`, // 8626
-		// },
 		{
 			name: 'apollo-express',
 			url: `http://localhost:${APOLLO_EXPRESS_PORT}/graphql`, // 8627
@@ -25,7 +20,6 @@ const gateway = new ApolloGateway({
 			name: 'apollo',
 			url: `http://localhost:${APOLLO_PORT}/graphql`, // 8628
 		},
-		// Define additional services here
 	],
 	__exposeQueryPlanExperimental: false,
 })
