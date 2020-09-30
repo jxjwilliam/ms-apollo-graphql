@@ -31,8 +31,7 @@ export default function ({ open, handleToggle, rowData, onSubmit }) {
 			type = 'UPDATE'
 			data = { ...data, id: rowData.id }
 		}
-		setTimeout(() => handleToggle(), 1000)
-		return onSubmit(type, data)
+		return Promise.resolve(onSubmit(type, data)).then(handleToggle)
 	}
 
 	return (

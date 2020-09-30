@@ -62,7 +62,6 @@ export default function ({ todos, onSubmit }) {
 	const handleDelete = (id) => () => {
 		if (window.confirm("You want to delete " + id)) {
 			onSubmit('DELETE', id)
-			handleOpen()
 		}
 	}
 

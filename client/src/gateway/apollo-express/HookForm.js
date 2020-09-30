@@ -32,7 +32,7 @@ export default function ({ rowData, handleToggle, onSubmit }) {
 		return Promise.resolve(onSubmit(type, data)).then(handleToggle)
 	}
 
-	const [checked, setChecked] = React.useState(rowData.completed);
+	const [checked, setChecked] = React.useState(isEmpty(rowData) ? false : rowData.completed);
 	const handleChange = (event) => {
 		setChecked(event.target.checked);
 	}
