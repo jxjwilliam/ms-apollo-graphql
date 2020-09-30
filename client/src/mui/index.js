@@ -1,5 +1,5 @@
-export { default as Album } from './Album'
-export { default as HookForm } from './HookForm'
+export { default as Album } from '../gateway/apollo-express/CardList'
+export { default as HookForm } from '../gateway/apollo-express/HookForm'
 export { default as Loading } from './Loading'
 export { default as NotFound } from './NotFound'
 export { default as Error } from './Error'

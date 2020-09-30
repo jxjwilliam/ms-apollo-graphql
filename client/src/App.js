@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Container, Tabs, Tab } from '@material-ui/core';
-import Gateway from './gateway'
-import Account from './gateway/apollo-express/Todo'
-import Author from './gateway/apollo/Author'
 import Blog from './express'
+import Gateway from './gateway'
+import Todo from './gateway/apollo-express/Todo'
+import Author from './gateway/apollo/Author'
 
 const useStyles = makeStyles({
 	root: {
@@ -17,9 +17,9 @@ function TabPanel(props) {
 
 	return (
 		<div
-			role="navigator"
+			role="tabpanel"
 			hidden={value !== index}
-			id={`scrollable-auto-navigator-${index}`}
+			id={`scrollable-auto-tabpanel-${index}`}
 			aria-labelledby={`scrollable-auto-tab-${index}`}
 			{...other}
 		>
@@ -49,15 +49,15 @@ export default function App() {
 				<Tab label="Apollo" />
 				<Tab label="Apollo Express" />
 			</Tabs>
-			<TabPanel value={value} index={0}>
+			<TabPanel value={value} index={2}>
 				<Blog />
 			</TabPanel>
 			<Gateway>
 				<TabPanel value={value} index={1}>
 					<Author/>
 				</TabPanel>
-				<TabPanel value={value} index={2}>
-					<Account/>
+				<TabPanel value={value} index={0}>
+					<Todo/>
 				</TabPanel>
 			</Gateway>
 		</Container>

@@ -32,9 +32,18 @@ function getToday() {
   return dayjs().format('YYYY-MM-DD')
 }
 
+function _getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function getRandomImage() {
+  return _getRandomInt(2) % 2 === 0 ? faker.image.imageUrl() : faker.random.image()
+}
+
 export {
   isEmpty,
   DataPrint,
   generatorBlogData,
-  getToday
+  getToday,
+  getRandomImage
 }

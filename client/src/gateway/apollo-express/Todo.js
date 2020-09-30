@@ -1,6 +1,7 @@
 import React from 'react'
 import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { Loading, Error, NotFound } from '../../mui'
+import CardList from './CardList'
 import { DataPrint } from '../../helpers/utils'
 
 const GET_TODOS = gql`
@@ -30,6 +31,7 @@ const GET_TODO = gql`
 const ADD_TODO = gql`
 	mutation ($todo: TodoInput) {
 		add_todo(todo: $todo) {
+			id
 			title
 			description
 			completed
@@ -53,37 +55,46 @@ const DELETE_TODO = gql`
 export default function () {
 	const { loading, error, data } = useQuery(GET_TODOS)
 	const [todo, { called, data: row } ] = useLazyQuery(GET_TODO)
-	const [createTodo] = useMutation(ADD_TODO)
-	const [updateTodo] = useMutation(UPDATE_TODO)
-	const [deleteTodo] = useMutation(DELETE_TODO)
+	const [create_todo] = useMutation(ADD_TODO)
+	const [update_todo] = useMutation(UPDATE_TODO)
+	const [delete_todo] = useMutation(DELETE_TODO)
 
 	if (loading) return <Loading />
 	if (error) return <Error error={error} />
 	if (!data) return <NotFound />
 
 	const onQuery = (id) => {
-		if(!called) todo({ variables: { id} })
+		if (!called) todo({ variables: { id } })
 		return row
 	}
 
+	const refetchQueries = [{ query: GET_TODOS }]
+
 	const onMutation = (type, data) => {
-		let variables;
 		switch (type) {
 			case 'ADD':
-				variables = data.todo
-				createTodo({ variables });
+				create_todo({
+					variables: { todo: data },
+					refetchQueries
+				});
 				break;
 			case 'UPDATE':
-				const {id, todo } = data
-				updateTodo({variables: {id: parseInt(id), todo}})
+				const { id, ...todo } = data
+				update_todo({
+					variables: { id, todo },
+					refetchQueries
+				})
 				break;
 			case 'DELETE':
-				deleteTodo({variables: { id: data.id }})
+				delete_todo({
+					variables: { id: data },
+					refetchQueries
+				})
 				break;
 			default:
-				console.log('Onsubmit！！！', data);
+				console.log('%c Onsubmit', 'color:red', data);
 		}
 	}
 
-	return <DataPrint data={data} />
+	return <CardList todos={data.todos} onSubmit={onMutation} />
 }

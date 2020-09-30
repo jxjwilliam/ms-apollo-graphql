@@ -33,12 +33,11 @@ export default function () {
 	const { register, handleSubmit } = useForm();
 	const [data, setData] = useState([])
 	const onSubmit = data => console.log(data);
-	const onSelected = () => { }
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<Input label="First Name" register={register} required />
-			<Select label="Age" ref={register} onSelected={onSelected} data={data} />
+			<Select label="Age" ref={register} onSelected={} data={data} />
 			<input type="submit" />
 		</form>
 	);

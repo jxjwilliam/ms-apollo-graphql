@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useMemo } from 'react'
 import MaterialTable from 'material-table'
-import Portal from '@material-ui/core/Portal';
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import DialogForm from './DialogForm'
 
 const useStyles = makeStyles(theme => ({
@@ -15,24 +14,23 @@ export default function ({ data: { Blogs }, onSubmit }) {
 	const [open, setOpen] = useState(false)
 	const [rowData, setRowData] = useState({})
 	const handleToggle = () => setOpen(!open)
-	const container = useRef(null)
 
 	// pretty strange: need this convert, otherwise error.
 	const rows = Blogs.map(blog => ({ ...blog }))
+	console.log('without useMemo, rows render 2 times', Blogs, rows)
 	return (
 		<div className={classes.root}>
-			<div>
+			<>
 				{open ? (
-					<Portal container={container.current}>
-						<DialogForm
-							open={open}
-							handleToggle={handleToggle}
-							rowData={rowData}
-							onSubmit={onSubmit}
-						/>
-					</Portal>
+					// DialogForm uses Portal underneath, so <Portal/> is optional.
+					<DialogForm
+						open={open}
+						handleToggle={handleToggle}
+						rowData={rowData}
+						onSubmit={onSubmit}
+					/>
 				) : null}
-			</div>
+			</>
 			<MaterialTable
 				title="博客内容列表"
 				columns={[
@@ -65,14 +63,12 @@ export default function ({ data: { Blogs }, onSubmit }) {
 						icon: 'delete',
 						tooltip: '删除',
 						onClick: (event, rowData) => {
-							window.confirm("You want to delete " + rowData.id)
+							if(window.confirm("You want to delete " + rowData.id))
 							onSubmit('DELETE', rowData.id)
 						}
 					}
 				]}
-				options={{
-					actionsColumnIndex: -1
-				}}
+				options={{ actionsColumnIndex: -1 }}
 				toolbarButtonAlignment={"right"}
 			/>
 		</div>

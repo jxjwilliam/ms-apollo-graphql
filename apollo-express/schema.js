@@ -14,10 +14,10 @@ const typeDefs = `
 
 	type Mutation {
 		add_todo(todo: TodoInput): Todo!
-		update_todo(id: ID!, todo: TodoInput): Todo
-		delete_todo(id: ID!): Todo
+		update_todo(id: ID!, todo: TodoInput): String!
+		delete_todo(id: ID!): String!
 	}
-
+	
 	input TodoInput {
 		title: String!
 		description: String!

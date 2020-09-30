@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme =>
 // https://codesandbox.io/s/sckvn?file=/src/App.js:680-684
 const SimpleCard = ({ data = {} }) => {
 	const classes = useStyles();
-	console.log(data.author)
+
 	const loading = Object.keys(data.author).length === 0;
 	const { id, name, username, birthDate } = data.author;
 	return (
