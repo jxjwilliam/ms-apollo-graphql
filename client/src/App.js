@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Container, Tabs, Tab } from '@material-ui/core';
-import Blog from './express'
-import Gateway from './gateway'
-import Todo from './gateway/apollo-express/Todo'
-import Author from './gateway/apollo/Author'
+import { Container, Tabs, Tab } from '@material-ui/core';
+import Blog from './express/'
+import Gateway from './gateway/'
+import Todo from './gateway/apollo-express/'
+import Author from './gateway/apollo/'
 
 const useStyles = makeStyles({
 	root: {
@@ -54,10 +54,10 @@ export default function App() {
 			</TabPanel>
 			<Gateway>
 				<TabPanel value={value} index={1}>
-					<Author/>
+					<Author />
 				</TabPanel>
 				<TabPanel value={value} index={0}>
-					<Todo/>
+					<Todo />
 				</TabPanel>
 			</Gateway>
 		</Container>

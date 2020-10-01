@@ -21,7 +21,7 @@ createTodoTable()
 
 const resolvers = {
 	Query: {
-		todos(_, args) {
+		todos() {
 			return new Promise((resolve, reject) => {
 				database.all('SELECT * FROM todos;', function (err, rows) {
 					if (err) reject([])
@@ -40,8 +40,9 @@ const resolvers = {
 		},
 	},
 	Mutation: {
-		add_todo(_, args, extensions) {
+		add_todo(_, args) {
 			const { title, description, createDate, completed } = args.todo
+			// eslint-disable-next-line max-len
 			// SQLite does not have a separate Boolean storage class. Instead, Boolean values are stored as integers 0 (false) and 1 (true).
 			const isCompleted = completed ? 1 : 0
 			return new Promise((resolve, reject) => {

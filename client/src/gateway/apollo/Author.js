@@ -1,29 +1,53 @@
-import React from 'react'
-import { gql, useQuery } from '@apollo/client'
-import { Error, Loading, NotFound } from '../../mui'
-import SimpleCard from './SimpleCard'
+import { gql } from '@apollo/client'
 
-const GET_AUTHOR = gql`
-    {
-      author {
-        id
-        name
-        username
-        birthDate
+const GET_AUTHORS = gql`
+  query {
+    authors {
+      id
+      name
+      books {
+        title
       }
     }
-   `
+  }
+`
 
-export default function () {
-	const { loading, error, data } = useQuery(GET_AUTHOR);
+const GET_AUTHOR = gql`
+  query ($id: ID!) {
+    author(id: $id) {
+      id
+      name
+      books {
+        title
+      }
+    }
+  }
+`
 
-	if (loading) return <Loading />
-	if (error) return <Error error={error} />
-	if (!data) return <NotFound />
+const ADD_AUTHOR = gql`
+  mutation($author: AuthorInput) {
+    add_author(author: $author) {
+      id
+    }
+  }
+`
 
-	if (Array.isArray(data)) {
-		const list = data.map((author, idx) => <SimpleCard data={author} key={idx} />)
-		return <>{list}</>;
-	}
-	else return <SimpleCard data={data} />
+const UPDATE_AUTHOR = gql`
+  mutation($id: ID!, $author: AuthorInput) {
+    edit_author(id: $id, author: $author)
+  }
+`
+
+const DELETE_AUTHOR = gql`
+  mutation($id: ID!) {
+    delete_author(id: $id)
+  }
+`
+
+export {
+  GET_AUTHORS,
+  GET_AUTHOR,
+  ADD_AUTHOR,
+  UPDATE_AUTHOR,
+  DELETE_AUTHOR,
 }

@@ -15,9 +15,8 @@ Version `2.0` of `src/express`
 - Todo -> Blog: gql-query-mutation-stuff
 - CardList -> List: using `Album` to replace `Material-Table`
 - HookForm + Dialog -> DialogForm
-    * HookForm -> react-hook-form () 
-    * Dialog -> popup dialog to display CRUD
-
+  - HookForm -> react-hook-form ()
+  - Dialog -> popup dialog to display CRUD
 
 ### Server
 

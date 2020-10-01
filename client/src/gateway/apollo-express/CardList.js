@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import {Add as AddIcon, FormatListNumbered, CheckCircle, PhotoCamera as CameraIcon } from '@material-ui/icons';
-import {Card, CardHeader, CardContent, CardActions, CardMedia} from '@material-ui/core';
+import { Add as AddIcon, FormatListNumbered, CheckCircle, PhotoCamera as CameraIcon } from '@material-ui/icons';
+import { Card, CardHeader, CardContent, CardActions, CardMedia } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -69,8 +69,8 @@ export default function ({ todos, onSubmit }) {
 		<>
 			{ open ? (
 				<Dialog open={open} onClose={handleOpen} aria-labelledby="simple-dialog-title">
-					<DialogTitle id="simple-dialog-title"><FormatListNumbered/> TODO</DialogTitle>
-					<HookForm rowData={rowData} onSubmit={onSubmit} handleToggle={handleOpen}/>
+					<DialogTitle id="simple-dialog-title"><FormatListNumbered /> TODO</DialogTitle>
+					<HookForm rowData={rowData} onSubmit={onSubmit} handleToggle={handleOpen} />
 				</Dialog>
 			) : null}
 			<>
@@ -101,7 +101,7 @@ export default function ({ todos, onSubmit }) {
 													<Avatar aria-label="recipe" className={classes.avatar}>
 														{id}
 														{/*{title.charAt(0).toUpperCase()}*/}
-												</Avatar>
+													</Avatar>
 												}
 												title={title}
 												subheader={createDate}
@@ -113,7 +113,7 @@ export default function ({ todos, onSubmit }) {
 											/>
 											<CardContent className={classes.cardContent}>
 												<Typography gutterBottom component="div">
-													{completed ? <CheckCircle color="secondary" />: "Not Done"}
+													{completed ? <CheckCircle color="secondary" /> : "Not Done"}
 												</Typography>
 												<Typography component={"p"}>
 													{description}

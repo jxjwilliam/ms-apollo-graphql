@@ -68,7 +68,7 @@ export default function () {
 	// 	return row
 	// }
 
-	const refetchQueries = [{query: GET_BLOGS}]
+	const refetchQueries = [{ query: GET_BLOGS }]
 
 	const onMutation = (type, data) => {
 		let variables;
