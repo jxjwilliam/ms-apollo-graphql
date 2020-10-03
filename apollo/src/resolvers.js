@@ -1,20 +1,5 @@
 const { paginateResults } = require('./utils')
 
-const authors = [
-	{
-		id: '1',
-		name: 'Ada Lovelace',
-		birthDate: '1815-12-10',
-		username: '@ada',
-	},
-	{
-		id: '2',
-		name: 'Alan Turing',
-		birthDate: '1912-06-23',
-		username: '@complete',
-	},
-]
-
 const resolvers = {
 	Query: {
 		authors: async (_, { pageSize = 20, after }, { dataSources }) => {
@@ -35,10 +20,11 @@ const resolvers = {
 		author(_, { id }, { dataSources }) {
 			return dataSources.authorAPI.getById({ id })
 		},
-		books() {
-			return []
+		books: async (parent, args, context, info) => {
+			return books.findAll()
 		},
 		book(_, { id }) {
+			books.findAll({where: {id}})
 			return { id }
 		},
 		me: async (_, __, { dataSources }) => {

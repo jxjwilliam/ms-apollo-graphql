@@ -25,9 +25,10 @@
   "license": "MIT",
   "dependencies": {
     "@apollo/federation": "latest",
+    "dayjs": "^1.9.1",
     "dotenv": "^8.2.0",
+    "faker": "^5.1.0",
     "graphql": "latest",
-    "graphql.macro": "^1.4.2",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {

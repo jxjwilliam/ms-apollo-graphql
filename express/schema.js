@@ -8,7 +8,7 @@ const sqlite3 = require('sqlite3').verbose()
  */
 
 // create a database if no exists
-const dbpath = path.resolve(path.dirname('.'), 'blog.db')
+const dbpath = path.resolve(path.join(__dirname, 'blog.db'))
 const database = new sqlite3.Database(dbpath)
 
 // create a table to insert blog

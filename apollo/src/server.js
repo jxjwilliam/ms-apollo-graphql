@@ -1,7 +1,7 @@
 const { ApolloServer } = require('apollo-server')
 const { buildFederatedSchema } = require('@apollo/federation')
 const typeDefs = require('./schema')
-const resolvers = require('./resolvers')
+// const resolvers = require('./resolvers')
 const { createStore } = require('./utils')
 // const UserAPI = require('./datasources/user')
 
@@ -16,8 +16,7 @@ const dataSources = () => ({
 })
 
 const server = new ApolloServer({
-	schema: buildFederatedSchema([{ typeDefs, resolvers }]),
-	dataSources,
+	schema: buildFederatedSchema([{ typeDefs }]),
 })
 
 server.listen({ port }).then(({ url }) => {

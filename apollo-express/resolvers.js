@@ -2,7 +2,7 @@ const path = require('path')
 const sqlite3 = require('sqlite3').verbose()
 
 // TODO: mongoose, sqlite3 ?
-const dbpath = path.resolve(path.dirname('.'), 'todo.db')
+const dbpath = path.resolve(path.join(__dirname, 'todo.db'))
 const database = new sqlite3.Database(dbpath)
 
 const createTodoTable = () => {
