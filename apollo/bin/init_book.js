@@ -1,9 +1,18 @@
 #!/usr/bin/env node
 
-const path = require('path')
+const { createStore } = require('../src/utils')
 
-const basename = path.resolve(path.join(__dirname, '..'))
+const books = []
 
-const { Book } = require(`${basename}/models/index`)
+const { Book } = createStore()
 
-Book.sync({ force: true }).catch(err => console.error(err))
+Book.sync({ force: false })
+  .then(async () => {
+    for (const book of books) {
+      await Book.create(book)
+    }
+  })
+  .then(() => {
+    console.log('Sync table and Seed Book successfully.')
+  })
+  .catch(err => console.error(err))

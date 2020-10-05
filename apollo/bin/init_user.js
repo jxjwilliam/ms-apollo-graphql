@@ -1,24 +1,33 @@
 #!/usr/bin/env node
 
-const path = require('path')
+const faker = require('faker')
+const dayjs = require('dayjs')
+const { createStore } = require('../src/utils')
 
-const basename = path.resolve(path.join(__dirname, '..'))
+const users = []
 
-const { User } = require(`${basename}/models/index`)
+const generateRandomUser = async () => {
+	const ary = []
+	for (let i = 0; i < 4; i += 1) {
+		const user = await {
+			name: faker.name.jobTitle(),
+			desc: faker.lorem.words(),
+			createDate: dayjs().format('YYYY-MM-DD'),
+		}
+		await ary.push(user)
+	}
+	return ary
+}
 
-const UserData = []
+const { User } = createStore()
 
 User.sync({ force: false })
-	.then(() => UserData.forEach((item, inx) => {
-
-			const {organization_id, department_id, ...rest} = item;
-
-			setTimeout(() => {
-				User.create(rest).then(user => {
-					user.setOrganization(organization_id);
-					user.setDepartment(department_id);
-				})
-			}, 1000 * inx)
-		})
-	)
-	.then(user => console.log('Sync table and Seed User successfully.'))
+	.then(async () => {
+		for (const user of users) {
+			await User.create(user)
+		}
+	})
+	.then(() => {
+		console.log('Sync table and Seed User successfully.')
+	})
+	.catch(err => console.error(err))

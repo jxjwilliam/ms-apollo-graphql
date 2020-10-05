@@ -12,6 +12,13 @@ const schema = gql`
 		desc: String
 		books: [Book]
 	}
+
+	type User {
+		name: String!
+		username: String!
+		email: String
+		phone: String
+	}
 `
 
 const typeDefs = mergeSchemas({

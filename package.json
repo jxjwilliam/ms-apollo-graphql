@@ -19,9 +19,9 @@
     "express-graphql",
     "apollo-express",
     "gateway",
-    "sqlite3, expressjs"
+    "sqlite3, sequelize, expressjs"
   ],
-  "author": "Best IT Consultants",
+  "author": "Best IT Consultanting",
   "license": "MIT",
   "dependencies": {
     "@apollo/federation": "latest",
