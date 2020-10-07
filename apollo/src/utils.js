@@ -32,27 +32,37 @@ module.exports.createStore = () => {
 		storage: './store.sqlite',
 	})
 
-	const users = db.define('user', {
+	const User = db.define('user', {
 		createdAt: Sequelize.DATE,
 		updatedAt: Sequelize.DATE,
+		name: Sequelize.STRING,
+		username: Sequelize.STRING,
 		email: Sequelize.STRING,
-		profileImage: Sequelize.STRING,
-		token: Sequelize.STRING,
+		phone: Sequelize.STRING,
 	})
 
-	const authors = db.define('author', {
+	const Publisher = db.define('author', {
+		createdAt: Sequelize.DATE,
+		updatedAt: Sequelize.DATE,
+		id: Sequelize.INTEGER,
+		title: Sequelize.STRING,
+		desc: Sequelize.STRING,
+	})
+
+	const Book = db.define('book', {
 		createdAt: Sequelize.DATE,
 		updatedAt: Sequelize.DATE,
 		postId: Sequelize.INTEGER,
 		userId: Sequelize.INTEGER,
 	})
 
-	const books = db.define('book', {
+	const Author = db.define('author', {
 		createdAt: Sequelize.DATE,
 		updatedAt: Sequelize.DATE,
-		postId: Sequelize.INTEGER,
-		userId: Sequelize.INTEGER,
+		id: Sequelize.INTEGER,
+		name: Sequelize.STRING,
+		desc: Sequelize.STRING,
 	})
 
-	return { db, users, authors, books }
+	return { db, User, Book, Author, Publisher }
 }
