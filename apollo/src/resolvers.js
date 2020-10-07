@@ -20,11 +20,11 @@ const resolvers = {
 		author(_, { id }, { dataSources }) {
 			return dataSources.authorAPI.getById({ id })
 		},
-		books: async (parent, args, context, info) => {
-			return books.findAll()
+		books: async (parent, args, { dataSources }) => {
+			return dataSources.bookAPI.findAll()
 		},
-		book(_, { id }) {
-			books.findAll({where: {id}})
+		book(_, { id }, { dataSources }) {
+			dataSources.bookAPI.findAll({ where: { id } })
 			return { id }
 		},
 		me: async (_, __, { dataSources }) => {
@@ -74,6 +74,14 @@ const resolvers = {
 				success: true,
 				message: 'delete-book',
 			}
+		},
+		login: async (_, { email }, { dataSources }) => {
+			const user = await dataSources.userAPI.findOrCreateUser({ email })
+			if (user) {
+				user.token = email.toString('base64')
+				return user
+			}
+			return null
 		},
 	},
 

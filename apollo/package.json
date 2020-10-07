@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "@apollo/federation": "latest",
+    "apollo-datasource": "^0.7.2",
     "apollo-server": "latest",
     "dotenv": "^8.2.0",
     "graphql": "latest",

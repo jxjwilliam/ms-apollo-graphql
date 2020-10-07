@@ -40,12 +40,19 @@ module.exports.createStore = () => {
 		token: Sequelize.STRING,
 	})
 
-	const posts = db.define('post', {
+	const authors = db.define('author', {
 		createdAt: Sequelize.DATE,
 		updatedAt: Sequelize.DATE,
 		postId: Sequelize.INTEGER,
 		userId: Sequelize.INTEGER,
 	})
 
-	return { db, users, posts }
+	const books = db.define('book', {
+		createdAt: Sequelize.DATE,
+		updatedAt: Sequelize.DATE,
+		postId: Sequelize.INTEGER,
+		userId: Sequelize.INTEGER,
+	})
+
+	return { db, users, authors, books }
 }

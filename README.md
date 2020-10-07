@@ -23,19 +23,40 @@ $ open http://localhost:3000
 
 ---
 
-### 2. express-graphql
+- @apollo/gateway
+- apollo-server
+
+
+### 2. express (blogs)
 
 ---
 
-- 462,203, [graphql/express-graphql](https://github.com/graphql/express-graphql)
+- express-graphql: 462,203, [graphql/express-graphql](https://github.com/graphql/express-graphql)
+- sqlite3
 
-### 3. apollo-server-express
+### 3. apollo-express (todos) 
+
+---
+- apollo-server-express: 731,636, [apollo-server-express](https://github.com/apollographql/apollo-server/tree/main/packages/apollo-server-express)
+- @apollo/federation
+- sqlite3
+
+### 4. apollo (author, book, user)
 
 ---
 
-- 731,636, [apollo-server-express](https://github.com/apollographql/apollo-server/tree/main/packages/apollo-server-express)
+- apollo-server
+- apollo-datasource
+- @apollo/federation
+- sqlite3 / sequelize
+    * findAll
+    * findByPk
+    * findOne
+    * findOrCreate
+    * findAndCountAll
 
-### 4. client
+
+### 5. client
 
 ---
 
