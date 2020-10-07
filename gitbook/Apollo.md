@@ -44,3 +44,19 @@ npm install -g sequelize-cli
 1. Don’t ever use `await` with `forEach`. Use a `for-loop` (or any loop without a callback) instead.
 1. Don’t `await` inside `filter` and `reduce`. Always `await` an array of promises with `map`, then `filter` or `reduce` accordingly.
 ```
+
+
+
+### Sequelize
+
+- create
+- update, save
+- findByPk
+- findOne
+- findOrCreate
+- finaAll
+- findAndCountAll
+- count
+- max
+- min
+- sum

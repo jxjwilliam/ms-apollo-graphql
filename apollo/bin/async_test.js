@@ -25,3 +25,13 @@ const generateRandomUser = async () => {
 }
 
 console.log(generateRandomUser())
+
+// .authenticate() can be used with the created instance to check whether the connection is working.
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Connection has been established successfully.");
+  })
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
+  });

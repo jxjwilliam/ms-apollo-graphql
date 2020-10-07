@@ -13,6 +13,10 @@ const app = express()
 
 app.use(cors({}))
 
+app.use('/express', (req, res, next) => {
+	console.log('YOU CALL REST /express')
+})
+
 // http://localhost:8626/graphql
 app.use(
 	'/graphql',
