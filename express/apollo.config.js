@@ -1,5 +1,5 @@
 module.exports = {
 	service: {
-		name: 'user:gh.jxjwilliam:iXx5IbuYiO6bgJhTwUWV1',
+		name: 'apollo-graphql-demo-1',
 	},
 }

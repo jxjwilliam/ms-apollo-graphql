@@ -10,7 +10,8 @@ const UserAPI = require('./datasources/user')
 
 require('dotenv').config()
 
-const { APOLLO_PORT: port, APOLLO_KEY: key } = process.env
+// APOLLO_KEY
+const { APOLLO_PORT: port } = process.env
 
 const store = createStore()
 

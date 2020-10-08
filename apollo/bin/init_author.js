@@ -6,9 +6,11 @@ const authors = []
 
 const { Author } = createStore()
 
-db.sync({ force: false })
+Author.sync({ force: false })
 	.then(async () => {
+		// eslint-disable-next-line no-restricted-syntax
 		for (const author of authors) {
+			// eslint-disable-next-line no-await-in-loop
 			await Author.create(author)
 		}
 	})

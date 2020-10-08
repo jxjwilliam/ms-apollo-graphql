@@ -29,7 +29,6 @@ const generateRandomData = number => {
 }
 
 const doInsert = database => ({ title, description, createDate, completed }) => {
-	console.log('---> ', `${title}, ${description}, ${createDate}, ${completed}`)
 	database.run(
 		'INSERT INTO todos (title, description, createDate, completed) VALUES (?,?,?,?);',
 		[title, description, createDate, completed],
