@@ -44,6 +44,7 @@ const typeDefs = `
 		author(id: String!): Author
 		publishers: [Publisher]
 		publisher(id: ID!): Publisher
+		users: [User]
 		user(name: String!): Publisher
 	}
 

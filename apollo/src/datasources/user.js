@@ -14,8 +14,10 @@ class UserAPI extends DataSource {
 	}
 
 	async list() {
-		const users = await this.store.User.findAll()
-		return users
+		// console.log('444: ', this.store.then(data => console.log(data)))
+		const User = await this.store
+		console.log('666', User.User)
+		return User.User.findAll()
 	}
 
 	async get({ id }) {
