@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { Loading, Error, NotFound } from '../../mui'
-import CardList from './CardList'
+import CardList from './SimpleCard'
 import { DataPrint } from '../../helpers/utils'
 import {
   GET_AUTHORS,

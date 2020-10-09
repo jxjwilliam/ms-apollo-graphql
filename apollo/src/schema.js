@@ -1,13 +1,13 @@
-const { gql, makeExecutableSchema, mergeSchemas } = require('apollo-server')
+// const { gql, makeExecutableSchema, mergeSchemas } = require('apollo-server')
 
 // Using `extend` allows us to combine both schemas inside developer tooling like Apollo VSCode and Apollo DevTools.
 // SDL: schema definition language
-const schema = gql`
-	type Book {
+const typeDefs = `
+	extend type Book {
 		id: ID!
 		title: String!
 		desc: String
-		author: Author!
+		author: Author
 	}
 
 	extend type Author {
@@ -17,36 +17,34 @@ const schema = gql`
 		books: [Book]
 	}
 
-	extend type User {
-		username: String!
-		name: String!
-		email: String
-		phone: String
-	}
-	
-	type Publisher {
+	extend type Publisher {
 		id: ID!
 		name: String!
 		desc: String
 	}
 
+	extend type User {
+		id: ID!
+		username: String!
+		name: String!
+		email: String
+		phone: String
+	}
+
 	type Request {
-		"2020-10-07"
-    timestamp: String
-    sku: String
-		"1968-06-21"
-    published: String
-    query: String
-    data: String
-  }
+		timestamp: String
+		sku: String
+		createDate: String
+	}
 
 	type Query {
 		books: [Book]
 		book(title: String!): Book
 		authors: [Author]
-		author(name: String!): Author
-		Publishers: [Publisher]
-		me(name: String!): Publisher
+		author(id: String!): Author
+		publishers: [Publisher]
+		publisher(id: ID!): Publisher
+		user(name: String!): Publisher
 	}
 
 	type Mutation {
@@ -61,17 +59,9 @@ const schema = gql`
 		delete_publisher(id: ID!): Message
 	}
 
-	interface MutationResponse {
+	type Message {
 		code: String!
 		success: Boolean!
-		message: String!
-	}
-
-	type Message implements MutationResponse {
-		code: String!
-		success: Boolean!
-		message: String!
-		user: User
 	}
 
 	input BookInput {
@@ -85,11 +75,12 @@ const schema = gql`
 	}
 
 	input PublisherInput {
+		name: String
 	}
 `
 
-const typeDefs = mergeSchemas({
-	schemas: [schema],
-})
+// const typeDefs = mergeSchemas({
+// 	schemas: [schema],
+// })
 
 module.exports = typeDefs

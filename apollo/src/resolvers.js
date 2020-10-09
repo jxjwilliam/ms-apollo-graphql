@@ -1,9 +1,9 @@
 const { paginateResults } = require('./utils')
 
-const resolvers = {
+const resolvers1 = {
 	Query: {
 		authors: async (_, { pageSize = 20, after }, { dataSources }) => {
-			const all = await dataSources.authorAPI.getAll()
+			const all = await dataSources.authorAPI.list()
 			all.reverse()
 			const authors = paginateResults({
 				after,
@@ -18,14 +18,17 @@ const resolvers = {
 			}
 		},
 		author(_, { id }, { dataSources }) {
-			return dataSources.authorAPI.getById({ id })
+			return dataSources.authorAPI.get({ id })
 		},
 		books: async (parent, args, { dataSources }) => {
-			return dataSources.bookAPI.findAll()
+			return dataSources.bookAPI.list()
 		},
 		book(_, { id }, { dataSources }) {
-			dataSources.bookAPI.findAll({ where: { id } })
+			dataSources.bookAPI.get({ where: { id } })
 			return { id }
+		},
+		users: (_, args, { dataSources }) => {
+			return dataSources.UserAPI.list()
 		},
 		me: async (_, __, { dataSources }) => {
 			return dataSources.userAPI.findOrCreateUser()
@@ -96,9 +99,10 @@ const resolvers = {
 
 	Author: {
 		__resolveReference(object) {
-			return authors.find(user => user.id === object.id)
+			// return dataSources.authorAPI.find(user => user.id === object.id)
 		},
 	},
 }
 
+const resolvers = {}
 module.exports = resolvers

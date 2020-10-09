@@ -2,7 +2,7 @@
 
 const { createStore } = require('../src/utils')
 
-const authors = []
+const authors = [{ name: 'Douglas Crockford', desc: 'JavaScript' }]
 
 const { Author } = createStore()
 

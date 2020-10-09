@@ -22,11 +22,10 @@ const app = express()
 
 server.applyMiddleware({ app })
 
-app.use(['/apollo-express', '/apollo',], (req, res) => {
-	console.log('YOU CALL REST /apollo-express')
+app.use(['/apollo-express', '/apollo'], (req, res) => {
+	res.status(200).send('YOU CALL REST /apollo-express')
 })
 
 app.listen({ port }, () => {
-	// eslint-disable-next-line no-console
 	console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`)
 })
