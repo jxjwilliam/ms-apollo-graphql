@@ -1,9 +1,9 @@
 const { Sequelize } = require('sequelize')
 
-module.exports.createStore = async () => {
+module.exports.createStore = () => {
 	let db
 	try {
-		db = await new Sequelize({
+		db = new Sequelize({
 			dialect: 'sqlite',
 			storage: './store.sqlite',
 		})
@@ -42,4 +42,33 @@ module.exports.createStore = async () => {
 	})
 
 	return { db, User, Book, Author, Publisher }
+}
+
+module.exports.crud = Model => {
+	return {
+		// from resolvers -> Query
+		list() {
+			return Model.findAll()
+		},
+
+		async get(id) {
+			const data = await Model.findByPk(id)
+			return data
+		},
+
+		async post(data) {
+			const result = await Model.create(data)
+			return result
+		},
+
+		async put({ id, data }) {
+			const result = await Model.update(data, { where: { id } })
+			return result
+		},
+
+		async delete(id) {
+			const count = await Model.destroy({ where: { id } })
+			return count
+		},
+	}
 }

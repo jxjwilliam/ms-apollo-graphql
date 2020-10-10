@@ -1,111 +1,102 @@
-const { paginateResults } = require('./utils')
-
 const resolvers = {
 	Query: {
-		authors: async (_, { pageSize = 20, after }, { dataSources }) => {
+		authors: async (parent, args, context, info) => {
+			const { dataSources } = context
 			const all = await dataSources.authorAPI.list()
-			all.reverse()
-			const authors = paginateResults({
-				after,
-				pageSize,
-				results: all,
-			})
-			const len = authors.length
-			return {
-				authors,
-				cursor: len ? authors[len - 1].cursor : null,
-				hasMore: len ? authors[len - 1].cursor !== all[all.length - 1].cursor : false,
-			}
+			return all.reverse()
 		},
 		author(_, { id }, { dataSources }) {
-			return dataSources.authorAPI.get({ id })
+			return dataSources.authorAPI.get(id)
 		},
 		books: async (parent, args, { dataSources }) => {
 			return dataSources.bookAPI.list()
 		},
 		book(_, { id }, { dataSources }) {
-			dataSources.bookAPI.get({ where: { id } })
-			return { id }
+			return dataSources.bookAPI.get(id)
 		},
 		users: async (_, args, { dataSources }) => {
-			console.log('333: ', dataSources.userAPI)
-			const users = await dataSources.userAPI.list()
+			const instance = dataSources.userAPI
+			const users = await instance.list()
 			return users
 		},
 		user(_, { id }, { dataSources }) {
-			dataSources.userAPI.get({ where: { id } })
-			return { id }
+			return dataSources.userAPI.get(id)
 		},
-		me: async (_, __, { dataSources }) => {
-			return dataSources.userAPI.findOrCreateUser()
+		me: async (_, args, { dataSources }) => {
+			return dataSources.userAPI.get(args.id)
+		},
+		publishers(_, args, { dataSources }) {
+			return dataSources.publisherAPI.list()
+		},
+		publisher(_, { id }, { dataSources }) {
+			return dataSources.publisherAPI.get(id)
 		},
 	},
 
 	Mutation: {
-		add_author(_, args) {
-			console.log(args.author)
-			return {
+		add_author(_, { author }, { dataSources }) {
+			return dataSources.authorAPI
+				.post(author)
+				.then(res => res.toJSON())
+				.then(data => ({
+					success: true,
+					code: `add ${JSON.stringify(data)}`,
+				}))
+		},
+		edit_author(_, { id, author }, { dataSources }) {
+			return dataSources.authorAPI.put({ id, data: author }).then(data => ({
 				success: true,
-				message: 'add',
-			}
+				code: `edit ${JSON.stringify(data)}`,
+			}))
 		},
-		edit_author(_, { id, author }) {
-			console.log(id, author)
-			return {
+		delete_author(_, { id }, { dataSources }) {
+			return dataSources.authorAPI.delete(id).then(data => ({
 				success: true,
-				message: 'edit',
-			}
+				code: `delete id=${id}, count=${data}`,
+			}))
 		},
-		delete_author(_, { id }) {
-			console.log(id)
-			return {
+		add_book: (_, { book }, { dataSources }) => {
+			return dataSources.bookAPI
+				.post(book)
+				.then(res => res.toJSON())
+				.then(data => ({
+					success: true,
+					code: `add ${JSON.stringify(data)}`,
+				}))
+		},
+		edit_book: (_, { id, book }, { dataSources }) => {
+			return dataSources.bookAPI.put({ id, data: book }).then(data => ({
 				success: true,
-				message: 'delete',
-			}
+				code: `edit id=${id}, count=${data}`,
+			}))
 		},
-		add_book: (_, { book }) => {
-			console.log(book)
-			return {
+		delete_book: (_, { id }, { dataSources }) => {
+			return dataSources.bookAPI.delete(id).then(data => ({
 				success: true,
-				message: 'add-book',
-			}
+				code: `delete id=${id}, count=${data}`,
+			}))
 		},
-		edit_book: (_, { id, book }) => {
-			console.log(id, book)
-			return {
+		add_publisher: (_, args, { dataSources }) => {
+			// console.log(dataSources.publisherAPI)
+			return dataSources.publisherAPI
+				.post(args.publisher)
+				.then(result => result.toJSON())
+				.then(data => ({
+					success: true,
+					code: `add ${JSON.stringify(data)}`,
+				}))
+		},
+		edit_publisher(_, { id, publisher }, { dataSources }) {
+			return dataSources.publisherAPI.put({ id, data: publisher }).then(data => ({
 				success: true,
-				message: 'eit-book',
-			}
+				code: `edit id=${id}, count=${data}`,
+			}))
 		},
-		delete_book: (_, { id }) => {
-			console.log(id)
-			return {
+		delete_publisher(_, { id }, { dataSources }) {
+			return dataSources.publisherAPI.delete(id).then(data => ({
 				success: true,
-				message: 'delete-book',
-			}
-		},
-		login: async (_, { email }, { dataSources }) => {
-			const user = await dataSources.userAPI.findOrCreateUser({ email })
-			if (user) {
-				user.token = email.toString('base64')
-				return user
-			}
-			return null
-		},
-	},
-
-	Subscription: {},
-
-	// https://www.apollographql.com/docs/apollo-server/api/apollo-federation/
-	User: {
-		__resolveReference(user, { fetchUserById }) {
-			return fetchUserById(user.id)
-		},
-	},
-
-	Author: {
-		__resolveReference(object) {
-			// return dataSources.authorAPI.find(user => user.id === object.id)
+				code: `delete id=${id}, count=${data}`,
+			}))
 		},
 	},
 }

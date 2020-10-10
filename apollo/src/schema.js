@@ -1,29 +1,29 @@
-// const { gql, makeExecutableSchema, mergeSchemas } = require('apollo-server')
+const { gql } = require('apollo-server')
 
 // Using `extend` allows us to combine both schemas inside developer tooling like Apollo VSCode and Apollo DevTools.
 // SDL: schema definition language
-const typeDefs = `
-	extend type Book {
+const typeDefs = gql`
+	type Book {
 		id: ID!
 		title: String!
 		desc: String
 		author: Author
 	}
 
-	extend type Author {
+	type Author {
 		id: ID!
 		name: String!
 		desc: String
 		books: [Book]
 	}
 
-	extend type Publisher {
+	type Publisher {
 		id: ID!
 		name: String!
 		desc: String
 	}
 
-	extend type User {
+	type User {
 		id: ID!
 		username: String!
 		name: String!
@@ -37,18 +37,19 @@ const typeDefs = `
 		createDate: String
 	}
 
-	type Query {
+	extend type Query {
 		books: [Book]
-		book(title: String!): Book
+		book(id: ID!): Book
 		authors: [Author]
-		author(id: String!): Author
+		author(id: ID!): Author
 		publishers: [Publisher]
 		publisher(id: ID!): Publisher
 		users: [User]
-		user(name: String!): Publisher
+		user(id: ID!): User
+		me(id: ID!): User
 	}
 
-	type Mutation {
+	extend type Mutation {
 		add_book(book: BookInput): Message
 		edit_book(id: ID!, book: BookInput): Message
 		delete_book(id: ID!): Message
@@ -76,7 +77,8 @@ const typeDefs = `
 	}
 
 	input PublisherInput {
-		name: String
+		name: String!
+		desc: String
 	}
 `
 

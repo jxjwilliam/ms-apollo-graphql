@@ -13,36 +13,39 @@ class UserAPI extends DataSource {
 		this.context = config.context
 	}
 
+	// from resolvers -> Query -> users
 	async list() {
-		// console.log('444: ', this.store.then(data => console.log(data)))
-		const User = await this.store
-		console.log('666', User.User)
-		return User.User.findAll()
+		return this.store.User.findAll()
 	}
 
-	async get({ id }) {
+	/**
+	 * - both work: user.get({ plain: true }), user.toJSON()
+	 * - findByPk, findOne all work
+	 */
+	async get(id) {
 		const user = await this.store.User.findByPk(id)
-		return user
+		return user.toJSON()
 	}
 
-	async post({ user }) {
-		const result = await this.store.User.save(user)
+	// same as `get`
+	async me(id) {
+		const user = await this.store.User.findOne({ where: { id } })
+		return user // user.get({ plain: true })
+	}
+
+	async post(user) {
+		const result = await this.store.User.create(user)
 		return result
 	}
 
 	async put({ id, user }) {
-		const result = await this.store.User.update(
-			{
-				where: { id },
-			},
-			user
-		)
+		const result = await this.store.User.update(user, { where: { id } })
 		return result
 	}
 
-	async delete({ id }) {
-		const result = await this.store.User.delete(id)
-		return result
+	async delete(id) {
+		const count = await this.store.User.destroy({ where: { id } })
+		return count
 	}
 }
 

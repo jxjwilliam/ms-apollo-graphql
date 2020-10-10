@@ -4,14 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "run-client": "cd client && yarn start",
-    "run-gateway": "cd gateway && yarn start",
-    "run-services": "concurrently \"yarn run-client\" \"yarn run-gateway\"",
-    "start-service-apollo": "cd apollo && yarn start",
-    "start-service-express": "cd express && yarn start",
-    "start-service-apollo-express": "cd apollo-express && yarn start",
-    "start-services": "concurrently \"npm:start-service-*\"",
-    "start": "concurrently \"npm:start-service-*\" \"yarn run-services\" ",
+    "server": "concurrently -k npm:server:*",
+    "server:apollo": "cd apollo && yarn start",
+    "server:express": "cd express && yarn start",
+    "server:apollo-express": "cd apollo-express && yarn start",
+    "server:gateway": "cd gateway && yarn start",
+    "client": "cd client && yarn start",
+    "start": "concurrently \"yarn client\" \"yarn server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
