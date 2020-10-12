@@ -20,7 +20,8 @@ database.run(`
 		title text,
 		description text,
 		createDate text,
-		completed integer
+		completed integer,
+		priority text
 	)
 `)
 

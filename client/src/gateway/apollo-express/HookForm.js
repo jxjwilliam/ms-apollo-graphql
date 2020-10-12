@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { makeStyles } from '@material-ui/core/styles'
 import { TextField, Checkbox, Grid, FormControlLabel, Button } from "@material-ui/core";
 import { getToday, isEmpty } from '../../helpers/utils'
@@ -66,6 +66,18 @@ export default function ({ rowData, handleToggle, onSubmit }) {
 					/>
 				</Grid>
 				<Grid item xs={12}>
+					<TextField
+						id="priority"
+						name="priority"
+						label="Priority..."
+						inputRef={register}
+						fullWidth
+						rows={6}
+						autoComplete="priority"
+						defaultValue="LOW"
+					/>
+				</Grid>
+				<Grid item xs={12}>
 					<FormControlLabel
 						control={
 							<Checkbox
@@ -77,6 +89,9 @@ export default function ({ rowData, handleToggle, onSubmit }) {
 							/>}
 						label="Completed"
 					/>
+				</Grid>
+				<Grid item xs={12}>
+
 				</Grid>
 				<Grid item xs={12} md={6}>
 					<TextField

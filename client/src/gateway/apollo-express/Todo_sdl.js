@@ -8,6 +8,7 @@ const GET_TODOS = gql`
 			description
 			completed
 			createDate
+			priority
 		}
 	}
 `
@@ -20,6 +21,7 @@ const GET_TODO = gql`
 			description
 			completed
 			createDate
+			priority
 		}
 	}
 `

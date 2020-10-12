@@ -45,9 +45,9 @@ export default function App() {
 				textColor="primary"
 				centered
 			>
-				<Tab label="Express" />
-				<Tab label="Apollo" />
 				<Tab label="Apollo Express" />
+				<Tab label="Apollo" />
+				<Tab label="Express" />
 			</Tabs>
 			<TabPanel value={value} index={2}>
 				<Blog />

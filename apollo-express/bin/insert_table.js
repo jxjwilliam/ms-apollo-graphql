@@ -23,15 +23,16 @@ const generateRandomData = number => {
 					description: faker.lorem.words(),
 					createDate: dayjs().format('YYYY-MM-DD'),
 					completed: 0,
+					priority: 'LOW',
 				}),
 			]
 		}, [])
 }
 
-const doInsert = database => ({ title, description, createDate, completed }) => {
+const doInsert = database => ({ title, description, createDate, completed, priority }) => {
 	database.run(
-		'INSERT INTO todos (title, description, createDate, completed) VALUES (?,?,?,?);',
-		[title, description, createDate, completed],
+		'INSERT INTO todos (title, description, createDate, completed, priority) VALUES (?,?,?,?,?);',
+		[title, description, createDate, completed, priority],
 		err => {
 			if (err) throw new Error(err)
 		}
@@ -55,6 +56,7 @@ const database = new sqlite3.Database(dbpath, err => {
 	// Promise.resolve('anything').then(() => console.log('resolved'))
 	Promise.all(generateRandomData(INIT_NUMBER))
 		.then(async data => {
+			console.log('---', data)
 			const addAction = doInsert(database)
 			await data.map(addAction)
 		})

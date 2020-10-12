@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { Loading, Error, NotFound } from '../../mui'
-import CardList from './SimpleCard'
+import BookList from './List'
 import { DataPrint } from '../../helpers/utils'
 import {
   GET_AUTHORS,
@@ -65,7 +65,7 @@ export default function () {
 
   return (
     <>
-      <CardList authors={data.authors} onSubmit={onMutation} />
+      <BookList authors={data.authors} onSubmit={onMutation} />
       {row && <DataPrint data={row} onQuery={onQuery} />}
     </>
   )

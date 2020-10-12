@@ -12,7 +12,8 @@ const createTodoTable = () => {
         title text,
         description text,
         createDate text,
-        completed integer )`
+				completed integer,
+				priority text )`
 
 	return database.run(query)
 }
@@ -41,14 +42,16 @@ const resolvers = {
 	},
 	Mutation: {
 		add_todo(_, args) {
-			const { title, description, createDate, completed } = args.todo
+			console.log('DYING:', args)
+
+			const { title, description, createDate, completed, priority } = args.todo
 			// eslint-disable-next-line max-len
 			// SQLite does not have a separate Boolean storage class. Instead, Boolean values are stored as integers 0 (false) and 1 (true).
 			const isCompleted = completed ? 1 : 0
 			return new Promise((resolve, reject) => {
 				database.run(
-					'INSERT INTO todos (title, description, createDate, completed) VALUES (?,?,?,?);',
-					[title, description, createDate, isCompleted],
+					'INSERT INTO todos (title, description, createDate, completed, priority) VALUES (?,?,?,?,?);',
+					[title, description, createDate, isCompleted, priority],
 					err => {
 						if (err) reject(null)
 						database.get('SELECT last_insert_rowid() as id', (error, row) => {
@@ -58,6 +61,7 @@ const resolvers = {
 								description,
 								createDate,
 								completed,
+								priority,
 							})
 						})
 					}
@@ -67,13 +71,13 @@ const resolvers = {
 		update_todo(_, args) {
 			const {
 				id,
-				todo: { title, description, createDate, completed },
+				todo: { title, description, createDate, completed, priority },
 			} = args
 			const isCompleted = completed ? 1 : 0
 			return new Promise((resolve, reject) => {
 				database.run(
-					'UPDATE todos SET title = (?), description = (?), createDate = (?), completed = (?) WHERE id = (?);',
-					[title, description, createDate, isCompleted, id],
+					'UPDATE todos SET title = (?), description = (?), createDate = (?), completed = (?), priority = (?) WHERE id = (?);',
+					[title, description, createDate, isCompleted, priority, id],
 					err => {
 						if (err) reject(err)
 						resolve(`Todo #${id} updated`)

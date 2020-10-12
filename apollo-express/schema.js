@@ -5,6 +5,13 @@ const typeDefs = `
 		description: String!
 		completed: Boolean!
 		createDate: String!
+		priority: Priority!
+	}
+
+	enum Priority {
+		LOW
+		MEDIUM
+		HIGH
 	}
 
 	type Query {
@@ -23,6 +30,7 @@ const typeDefs = `
 		description: String!
 		completed: Boolean! = false
 		createDate: String!
+		priority: Priority!
 	}
 `
 

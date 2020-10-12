@@ -91,7 +91,7 @@ export default function ({ todos, onSubmit }) {
 						{/* End hero unit */}
 						<Grid container spacing={4}>
 							{todos.map((todo, idx) => {
-								const { title, description, createDate, completed, id } = todo
+								const { title, description, createDate, completed, priority, id } = todo
 								const image = getRandomImage()
 								return (
 									<Grid item key={`${title}_${idx}`} xs={12} sm={6} md={4}>
@@ -114,6 +114,9 @@ export default function ({ todos, onSubmit }) {
 											<CardContent className={classes.cardContent}>
 												<Typography gutterBottom component="div">
 													{completed ? <CheckCircle color="secondary" /> : "Not Done"}
+												</Typography>
+												<Typography gutterBottom component="div">
+													{priority}
 												</Typography>
 												<Typography component={"p"}>
 													{description}

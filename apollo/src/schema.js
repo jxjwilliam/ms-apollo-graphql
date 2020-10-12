@@ -7,7 +7,8 @@ const typeDefs = gql`
 		id: ID!
 		title: String!
 		desc: String
-		author: Author
+		authors: [Author]
+		publisher: Publisher
 	}
 
 	type Author {
@@ -21,6 +22,7 @@ const typeDefs = gql`
 		id: ID!
 		name: String!
 		desc: String
+		books: [Book]
 	}
 
 	type User {
@@ -38,27 +40,28 @@ const typeDefs = gql`
 	}
 
 	extend type Query {
-		books: [Book]
-		book(id: ID!): Book
-		authors: [Author]
-		author(id: ID!): Author
-		publishers: [Publisher]
-		publisher(id: ID!): Publisher
+		books: [Book!]!
+		book(id: ID!): Book!
+		authors: [Author!]!
+		author(id: ID!): Author!
+		publishers: [Publisher!]!
+		publisher(id: ID!): Publisher!
 		users: [User]
 		user(id: ID!): User
 		me(id: ID!): User
 	}
 
 	extend type Mutation {
-		add_book(book: BookInput): Message
-		edit_book(id: ID!, book: BookInput): Message
-		delete_book(id: ID!): Message
-		add_author(author: AuthorInput): Message
-		edit_author(id: ID!, author: AuthorInput): Message
-		delete_author(id: ID!): Message
-		add_publisher(publisher: PublisherInput): Message
-		edit_publisher(id: ID!, publisher: PublisherInput): Message
+		add_book(book: BookInput!): Message!
+		edit_book(id: ID!, book: BookInput!): Message!
+		delete_book(id: ID!): Message!
+		add_author(author: AuthorInput!): Message!
+		edit_author(id: ID!, author: AuthorInput!): Message!
+		delete_author(id: ID!): Message!
+		add_publisher(publisher: PublisherInput!): Message!
+		edit_publisher(id: ID!, publisher: PublisherInput!): Message!
 		delete_publisher(id: ID!): Message
+		setBookAuthors(bookId: ID!, authorIds: [ID!]): Message!
 	}
 
 	type Message {
@@ -66,9 +69,20 @@ const typeDefs = gql`
 		success: Boolean!
 	}
 
+	interface Item {
+		title: String!
+	}
+
+	enum Category {
+		IT
+		STORY
+		WORLDWIDE
+	}
+
 	input BookInput {
 		title: String
-		author: String
+		authorId: ID!
+		publisherId: ID!
 	}
 
 	input AuthorInput {
@@ -79,6 +93,30 @@ const typeDefs = gql`
 	input PublisherInput {
 		name: String!
 		desc: String
+	}
+
+	type Subscription {
+		authorMutated: AuthorMutationPayload!
+		bookMutated: BookMutationPayload!
+		publisherMutated: PublisherMutationPayload!
+	}
+	type AuthorMutationPayload {
+		mutation: MutationType!
+		node: Author!
+	}
+	type BookMutationPayload {
+		mutation: MutationType!
+		node: Book!
+	}
+	type PublisherMutationPayload {
+		mutation: MutationType!
+		node: Publisher!
+	}
+
+	enum MutationType {
+		CREATED
+		UPDATED
+		DELETED
 	}
 `
 
