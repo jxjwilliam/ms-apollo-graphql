@@ -9,13 +9,13 @@ const INIT_NUMBER = 4
 const generateRandomUser = number => {
 	const ary = []
 	for (let i = 0; i < number; i += 1) {
-		const user = Promise.resolve({
+		const user = {
 			name: faker.internet.userName(),
 			username: faker.name.findName(),
 			email: faker.internet.email(),
 			phone: faker.phone.phoneNumber(),
 			createDate: dayjs().format('YYYY-MM-DD'),
-		})
+		}
 		ary.push(user)
 	}
 	return ary
@@ -27,10 +27,10 @@ const { User } = createStore()
 // warning: for (const user of users) await User.create(user)
 User.sync({ force: false })
 	.then(async () => {
-		const users = await Promise.all(generateRandomUser(INIT_NUMBER))
-		return users
+		const users = generateRandomUser(INIT_NUMBER)
+		return users.map(user => User.create(user))
 	})
-	.then(users => users.map(user => User.create(user)))
+	.then(pusers => Promise.all(pusers))
 	.then(async () => {
 		const users = await User.findAll()
 		return users

@@ -41,7 +41,7 @@ module.exports.createStore = () => {
 }
 
 module.exports.crud = Model => {
-	return {
+	const stand = {
 		// from resolvers -> Query
 		list() {
 			return Model.findAll()
@@ -67,4 +67,12 @@ module.exports.crud = Model => {
 			return count
 		},
 	}
+
+	const getByBookId = bookId => Model.findAll({ where: { bookId } })
+
+	const getByAuthorId = authorId => Model.findAll({ where: { authorId } })
+
+	Object.assign(stand, { getByBookId, getByAuthorId })
+
+	return stand
 }

@@ -6,7 +6,7 @@ type Book {
 	publisher: Publisher
 }
 
-extend type Query {
+type Query {
 	books: [Book!]!
 	book(id: ID!): Book!
 }

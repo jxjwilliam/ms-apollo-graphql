@@ -23,6 +23,7 @@ const dataSources = () => ({
 	authorAPI: new AuthorAPI({ store, Model: store.Author }),
 	bookAPI: new DBAPI({ Model: store.Book }),
 	publisherAPI: new DBAPI({ Model: store.Publisher }),
+	bookAuthorAPI: new DBAPI({ Model: store.BookAuthor }),
 })
 
 const server = new ApolloServer({
