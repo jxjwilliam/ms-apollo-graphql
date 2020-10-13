@@ -2,7 +2,24 @@
 
 const { createStore } = require('../src/utils')
 
-const publishers = [{ name: "O'Realy", desc: "O'Realy publisher" }]
+const publishers = [
+	{
+		desc: 'addison-wesley',
+		name: 'Addison Wesley',
+	},
+	{
+		desc: 'prentice-hall',
+		name: 'Prentice Hall',
+	},
+	{
+		desc: 'pearson',
+		name: 'Pearson Publishing',
+	},
+	{
+		name: "O'Realy",
+		desc: "O'Realy publisher",
+	},
+]
 
 const { Publisher } = createStore()
 

@@ -1,0 +1,14 @@
+type BookAuthor {
+	book_id: ID!
+	author_id: ID!
+}
+
+extend type Query {
+	book_authors: [BookAuthor]
+	book_author(book_id: ID!): BookAuthor!
+	author_book(author_id: ID!): BookAuthor
+}
+
+extend type Mutation {
+	set_bookAuthor(book_id: ID!, author_id: ID!): Message!
+}

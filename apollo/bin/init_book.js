@@ -4,28 +4,34 @@ const { createStore } = require('../src/utils')
 
 const books = [
 	{
-		title: 'Harry Potter and the Chamber of Secrets',
-		author: 'J.K. Rowling',
+		desc: 'design-patterns',
+		title: 'Design Patterns - Elements of Reusable Object-Oriented Software',
+		publisherId: 'addison-wesley',
 	},
 	{
-		title: 'Jurassic Park',
-		author: 'Michael Crichton',
+		desc: 'refactoring',
+		title: 'Refactoring - Improving the Design of Existing Code',
+		publisherId: 'addison-wesley',
 	},
 	{
-		title: 'Fox in Socks',
-		author: 'Dr. Seuss',
+		desc: 'patterns-of-enterprise-application-architecture',
+		title: 'Patterns of Enterprise Application Architecture',
+		publisherId: 'addison-wesley',
 	},
 	{
-		title: 'San Guo',
-		author: 'Luo Guan Zhong',
+		desc: 'domain-driven-design',
+		title: 'Domain-Driven Design',
+		publisherId: 'addison-wesley',
 	},
 	{
-		title: 'The Awakening',
-		author: 'Kate Chopin',
+		desc: 'clean-code',
+		title: 'Clean Code - A Handbook of Agile Software Craftsmanship',
+		publisherId: 'prentice-hall',
 	},
 	{
-		title: 'City of Glass',
-		author: 'Paul Auster',
+		desc: 'agile-software-development',
+		title: 'Agile Software Development, Principles, Patterns, and Practices',
+		publisherId: 'pearson',
 	},
 ]
 

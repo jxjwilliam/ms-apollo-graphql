@@ -1,11 +1,11 @@
 const { ApolloServer, gql } = require('apollo-server')
 const { buildFederatedSchema } = require('@apollo/federation')
-const schema = require('./schema')
-const resolvers = require('./resolvers')
+const schema = require('./graphql/typedefs')
+const resolvers = require('./graphql/resolvers')
 const { createStore } = require('./utils')
 
 // follow the name-conventions of `fullstack-tutorial`
-const { DBAPI, AuthorAPI, BookAPI, UserAPI, PublisherAPI } = require('./datasources')
+const { DBAPI, AuthorAPI } = require('./datasources')
 
 require('dotenv').config()
 
@@ -20,7 +20,6 @@ const typeDefs = gql`
 `
 
 const dataSources = () => ({
-	userAPI: new UserAPI({ store }),
 	authorAPI: new AuthorAPI({ store, Model: store.Author }),
 	bookAPI: new DBAPI({ Model: store.Book }),
 	publisherAPI: new DBAPI({ Model: store.Publisher }),

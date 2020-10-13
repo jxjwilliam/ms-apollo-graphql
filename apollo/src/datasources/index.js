@@ -1,12 +1,10 @@
 const { DataSource } = require('apollo-datasource')
 const AuthorAPI = require('./author')
-const UserAPI = require('./user')
 const { crud } = require('../utils')
 
 /**
- * 1. user.js: traditional way
- * 2. author.js: improved by using `crud`
- * 3. book,publisher: simply and custom: delegate class
+ * - author.js: improved by using `crud`
+ * - book,publisher: simply and custom: delegate class
  */
 class DBAPI extends DataSource {
 	constructor(props) {
@@ -21,7 +19,6 @@ class DBAPI extends DataSource {
 }
 
 module.exports = {
-	UserAPI,
 	AuthorAPI,
 	DBAPI,
 }

@@ -9,6 +9,7 @@
     "apollo-server": "latest",
     "dotenv": "^8.2.0",
     "graphql": "latest",
+    "merge-graphql-schemas": "^1.7.8",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {

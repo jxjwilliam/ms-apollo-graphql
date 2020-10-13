@@ -1,0 +1,10 @@
+enum MutationType {
+	CREATED
+	UPDATED
+	DELETED
+}
+
+type Message {
+	code: String!
+	success: Boolean!
+}

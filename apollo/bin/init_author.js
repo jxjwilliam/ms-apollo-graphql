@@ -2,7 +2,40 @@
 
 const { createStore } = require('../src/utils')
 
-const authors = [{ name: 'Douglas Crockford', desc: 'JavaScript' }]
+const authors = [
+	{
+		name: 'Douglas Crockford',
+		desc: 'JavaScript',
+	},
+	{
+		desc: 'erich-gamma',
+		name: 'Erich Gamma',
+	},
+	{
+		desc: 'richard-helm',
+		name: 'Richard Helm',
+	},
+	{
+		desc: 'ralph-johnson',
+		name: 'Ralph Johnson',
+	},
+	{
+		desc: 'john-vlissides',
+		name: 'John Vlissides',
+	},
+	{
+		desc: 'martin-fowler',
+		name: 'Martin Fowler',
+	},
+	{
+		desc: 'eric-evans',
+		name: 'Eric Evans',
+	},
+	{
+		desc: 'robert-martin',
+		name: 'Robert C. Martin',
+	},
+]
 
 const { Author } = createStore()
 

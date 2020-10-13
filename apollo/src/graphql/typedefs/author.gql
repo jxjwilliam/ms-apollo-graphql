@@ -1,0 +1,22 @@
+type Author {
+	id: ID!
+	name: String!
+	desc: String!
+	books: [Book!]!
+}
+
+extend type Query {
+	authors: [Author!]!
+	author(id: ID!): Author!
+}
+
+extend type Mutation {
+	add_author(author: AuthorInput!): Message!
+	edit_author(id: ID!, author: AuthorInput!): Message!
+	delete_author(id: ID!): Message!
+}
+
+input AuthorInput {
+	name: String
+	desc: String
+}

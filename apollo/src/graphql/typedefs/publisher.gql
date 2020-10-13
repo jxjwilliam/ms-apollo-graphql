@@ -1,0 +1,22 @@
+type Publisher {
+	id: ID!
+	name: String!
+	desc: String!
+	books: [Book!]!
+}
+
+extend type Query {
+	publishers: [Publisher!]!
+	publisher(id: ID!): Publisher!
+}
+
+extend type Mutation {
+	add_publisher(publisher: PublisherInput!): Message!
+	edit_publisher(id: ID!, publisher: PublisherInput!): Message!
+	delete_publisher(id: ID!): Message
+}
+
+input PublisherInput {
+	name: String!
+	desc: String
+}

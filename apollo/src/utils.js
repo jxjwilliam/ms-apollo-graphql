@@ -32,16 +32,12 @@ module.exports.createStore = () => {
 		desc: Sequelize.STRING,
 	})
 
-	const User = db.define('user', {
-		createdAt: Sequelize.DATE,
-		updatedAt: Sequelize.DATE,
-		username: Sequelize.STRING,
-		name: Sequelize.STRING,
-		email: Sequelize.STRING,
-		phone: Sequelize.STRING,
+	const BookAuthor = db.define('book_author', {
+		bookId: Sequelize.INTEGER,
+		authorId: Sequelize.INTEGER,
 	})
 
-	return { db, User, Book, Author, Publisher }
+	return { db, BookAuthor, Book, Author, Publisher }
 }
 
 module.exports.crud = Model => {
