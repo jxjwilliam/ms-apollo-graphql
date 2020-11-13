@@ -2,10 +2,11 @@
 
 ![Framework](etc/imgs/framework.png)
 
-## Client
+## Frontend
 
 ---
 
+- React
 - GraphQL
 - Apollo/Client
 - Material-ui
@@ -20,7 +21,11 @@
 - 3 micro-service implementation (see below)
 - `gitbook` documentary
 
-### microservice 1: Apollo Server
+### 1. Apollo Federation Gateway
+
+Include 2 microservice implementation:
+
+### 1.1 microservice 1: Apollo Server
 
 ---
 
@@ -30,7 +35,7 @@
 - `SQLite3` datasource
 - `Sequelize` middleware
 
-### microservice 2: Apollo Express Server
+### 1.2 microservice 2: Apollo Express Server
 
 ---
 
@@ -40,7 +45,9 @@
 - `SQLite3` datasource
 - `Sequelize` middleware
 
-### microservice 3: Express Server
+## 2. Express Server
+
+An microservice independent from Apollo Federation Gateway.
 
 ---
 
