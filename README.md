@@ -1,3 +1,7 @@
+## Framework
+
+![Framework](etc/imgs/framework.png)
+
 ## Client
 
 ---
@@ -35,9 +39,6 @@
 - `Apollo/Federation` as gateway server
 - `SQLite3` datasource
 - `Sequelize` middleware
-
-So microsservice 1 & 2 flow:
-![Apollo Federation as Gateway](etc/graphql-as-api-gateway.png)
 
 ### microservice 3: Express Server
 
@@ -171,3 +172,6 @@ e.g, for `todo`:
 - [Setup ESLint, Prettier & Airbnb Style Guide in under 2 Minutes](https://github.com/paulolramos/eslint-prettier-airbnb-react)
 
 - [sqlite3, express, graphql, react](https://github.com/jgilbertcastro/micro-blog)
+
+- Apollo Federation Gateway Server:
+  ![Apollo Federation as Gateway](etc/imgs/graphql-as-api-gateway.png)
