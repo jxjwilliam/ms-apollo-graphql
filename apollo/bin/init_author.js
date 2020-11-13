@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
-const { createStore } = require('../src/utils')
+// const { createStore } = require('../src/utils')
+// const { Author } = createStore()
+
+const { Author } = require('../models')
 
 const authors = [
 	{
@@ -36,8 +39,6 @@ const authors = [
 		name: 'Robert C. Martin',
 	},
 ]
-
-const { Author } = createStore()
 
 Author.sync({ force: false })
 	.then(async () => {

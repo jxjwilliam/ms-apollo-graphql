@@ -2,7 +2,8 @@ const { ApolloServer, gql } = require('apollo-server')
 const { buildFederatedSchema } = require('@apollo/federation')
 const schema = require('./graphql/typedefs')
 const resolvers = require('./graphql/resolvers')
-const { createStore } = require('./utils')
+// const { createStore } = require('./utils')
+const store = require('../models')
 
 // follow the name-conventions of `fullstack-tutorial`
 const { DBAPI, AuthorAPI } = require('./datasources')
@@ -13,7 +14,7 @@ require('dotenv').config()
 const { APOLLO_PORT: port } = process.env
 
 // creates a sequelize connection once. NOT for every request
-const store = createStore()
+// const store = createStore()
 
 const typeDefs = gql`
 	${schema}

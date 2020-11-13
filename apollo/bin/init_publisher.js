@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
-const { createStore } = require('../src/utils')
+// const { createStore } = require('../src/utils')
+// const { Publisher } = createStore()
+
+const { Publisher } = require('../models')
 
 const publishers = [
 	{
@@ -20,8 +23,6 @@ const publishers = [
 		desc: "O'Realy publisher",
 	},
 ]
-
-const { Publisher } = createStore()
 
 Publisher.sync({ force: false })
 	.then(async () => {

@@ -1,4 +1,4 @@
-### useQuery
+### useQuery, useLazyQuery, useStaticQuery
 
 ---
 

@@ -68,11 +68,14 @@ module.exports.crud = Model => {
 		},
 	}
 
-	const getByBookId = bookId => Model.findAll({ where: { bookId } })
+	// Only apply to book_author
+	if (typeof Model === 'function' && Model.name === 'book_author') {
+		const getByBookId = bookId => Model.findAll({ where: { bookId } })
 
-	const getByAuthorId = authorId => Model.findAll({ where: { authorId } })
+		const getByAuthorId = authorId => Model.findAll({ where: { authorId } })
 
-	Object.assign(stand, { getByBookId, getByAuthorId })
+		Object.assign(stand, { getByBookId, getByAuthorId })
+	}
 
 	return stand
 }

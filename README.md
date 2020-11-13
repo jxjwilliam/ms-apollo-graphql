@@ -1,11 +1,61 @@
-### Quick start
+## Client
 
 ---
 
+- GraphQL
+- Apollo/Client
+- Material-ui
+- React-router
+- React-hook-form
+
+## Backend
+
+---
+
+- `gateway` microservice as `BFF` (backend for frontend) server
+- 3 micro-service implementation (see below)
+- `gitbook` documentary
+
+### microservice 1: Apollo Server
+
+---
+
+- GraphQL
+- `Apollo-server` webserver
+- `Apollo/Federation` as gateway server
+- `SQLite3` datasource
+- `Sequelize` middleware
+
+### microservice 2: Apollo Express Server
+
+---
+
+- GraphQL
+- `apollo-server-express` webserver
+- `Apollo/Federation` as gateway server
+- `SQLite3` datasource
+- `Sequelize` middleware
+
+So microsservice 1 & 2 flow:
+![Apollo Federation as Gateway](etc/graphql-as-api-gateway.png)
+
+### microservice 3: Express Server
+
+---
+
+- GraphQL
+- `express` webserver
+- `express-graphql` middleware
+- `SQLite3` datasource
+- `Sequelize` middleware
+
+## Quick start
+
+---
 
 ```shell script
-$ git clone https://github.com/WilliamJiang/ms-graphql.git
-$ cd ms-graphql
+$ git clone https://github.com/jxjwilliam/ms-apollo-graphql.git
+$ cd ms-apollo-graphql
 $ yarn install (respectfully install dependencies under client/, gateway/, express/, apollo-express/)
 $ yarn start
 $ open http://localhost:3000
@@ -32,7 +82,7 @@ $ open http://localhost:3000
 ---
 
 - express-graphql: 462,203, [graphql/express-graphql](https://github.com/graphql/express-graphql)
-- sqlite3    
+- sqlite3
 - a micro-service of federation gateway
 - schema: input, query, mutation
 - resolvers: all the CRUD implementation
@@ -40,6 +90,7 @@ $ open http://localhost:3000
 ### 3. apollo-express (todos)
 
 ---
+
 Version `2.0` of `src/express`
 
 - apollo-server-express: 731,636, [apollo-server-express](https://github.com/apollographql/apollo-server/tree/main/packages/apollo-server-express)
@@ -51,7 +102,6 @@ Version `2.0` of `src/express`
 - sqlite3
 - `crud` full implementation.
 - NO extra dependencies and resource.
-
 
 ### 4. apollo (author, book, user)
 
@@ -78,7 +128,7 @@ e.g, for `todo`:
 - HookForm + Dialog -> DialogForm
 - HookForm -> react-hook-form ()
 - Dialog -> popup dialog to display CRUD
-  
+
 ### 5. As a whole
 
 ---
@@ -86,7 +136,33 @@ e.g, for `todo`:
 - eslint + prettier + airbnb
 - concurrently
 
-### Resource
+## Advantages
+
+---
+
+- The app is all-self-contained, no extra resource (like DB server) are needed, so it's convenient for deployment.
+- `CRUD` totally implmented
+- microservices
+
+## Demo screenshots
+
+### Menu1
+
+![menu1](etc/imgs/menu1.PNG)
+
+### Menu2
+
+![menu2](etc/imgs/menu2.PNG)
+
+### Menu3
+
+![menu3](etc/imgs/menu3.PNG)
+
+### Menu4
+
+![menu4](etc/imgs/menu4.PNG)
+
+## Resource
 
 ---
 

@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 
-const { createStore } = require('../src/utils')
+/**
+ * deprecated:
+ * const { createStore } = require('../src/utils')
+ * const { Book } = createStore()
+ */
+const { Book } = require('../models')
 
 const books = [
 	{
@@ -34,8 +39,6 @@ const books = [
 		publisherId: 'pearson',
 	},
 ]
-
-const { Book } = createStore()
 
 Book.sync({ force: false })
 	.then(async () => {
